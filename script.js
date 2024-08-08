@@ -1,5 +1,5 @@
 class Wordbruh {
-
+// hello
 }
 
 const charButtons = document.querySelectorAll('[data-char]')
