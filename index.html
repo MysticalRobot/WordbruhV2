@@ -162,101 +162,93 @@
       </button>
     </header>
     <div class="gameContainer">
-      <div class="guessContainer">
-        <div id="rowOne" class="guess" aria-label="first guess">
-          <div class="tile robotoBold"></div>
-          <div class="tile robotoBold"></div>
-          <div class="tile robotoBold"></div>
-          <div class="tile robotoBold"></div>
-          <div class="tile robotoBold"></div>
-          <div class="tile robotoBold"></div>
-        </div>
-        <div id="rowTwo" class="guess" aria-label="second guess">
-          <div class="tile robotoBold"></div>
-          <div class="tile robotoBold"></div>
-          <div class="tile robotoBold"></div>
-          <div class="tile robotoBold"></div>
-          <div class="tile robotoBold"></div>
-          <div class="tile robotoBold"></div>
-        </div>
-        <div id="rowThree" class="guess" aria-label="third guess">
-          <div class="tile robotoBold"></div>
-          <div class="tile robotoBold"></div>
-          <div class="tile robotoBold"></div>
-          <div class="tile robotoBold"></div>
-          <div class="tile robotoBold"></div>
-          <div class="tile robotoBold"></div>
-        </div>
-        <div id="rowFour" class="guess" aria-label="fourth guess">
-          <div class="tile robotoBold"></div>
-          <div class="tile robotoBold"></div>
-          <div class="tile robotoBold"></div>
-          <div class="tile robotoBold"></div>
-          <div class="tile robotoBold"></div>
-          <div class="tile robotoBold"></div>
-        </div>
-        <div id="rowFive" class="guess" aria-label="fifth guess">
-          <div class="tile robotoBold"></div>
-          <div class="tile robotoBold"></div>
-          <div class="tile robotoBold"></div>
-          <div class="tile robotoBold"></div>
-          <div class="tile robotoBold"></div>
-          <div class="tile robotoBold"></div>
-        </div>
-        <div id="rowSix" class="guess" aria-label="sixth guess">
-          <div class="tile robotoBold"></div>
-          <div class="tile robotoBold"></div>
-          <div class="tile robotoBold"></div>
-          <div class="tile robotoBold"></div>
-          <div class="tile robotoBold"></div>
-          <div class="tile robotoBold"></div>
-        </div>
+      <div class="guessGrid">
+        <div data-rowOne class="tile robotoBold">B</div>
+        <div data-rowOne class="tile robotoBold">U</div>
+        <div data-rowOne class="tile robotoBold">S</div>
+        <div data-rowOne class="tile robotoBold">S</div>
+        <div data-rowOne class="tile robotoBold">S</div>
+        <div data-rowOne class="tile robotoBold">S</div>
+        <div data-rowTwo class="tile robotoBold"></div>
+        <div data-rowTwo class="tile robotoBold"></div>
+        <div data-rowTwo class="tile robotoBold"></div>
+        <div data-rowTwo class="tile robotoBold"></div>
+        <div data-rowTwo class="tile robotoBold"></div>
+        <div data-rowTwo class="tile robotoBold"></div>
+        <div data-rowThree class="tile robotoBold"></div>
+        <div data-rowThree class="tile robotoBold"></div>
+        <div data-rowThree class="tile robotoBold"></div>
+        <div data-rowThree class="tile robotoBold"></div>
+        <div data-rowThree class="tile robotoBold"></div>
+        <div data-rowThree class="tile robotoBold"></div>
+        <div data-rowFour class="tile robotoBold"></div>
+        <div data-rowFour class="tile robotoBold"></div>
+        <div data-rowFour class="tile robotoBold"></div>
+        <div data-rowFour class="tile robotoBold"></div>
+        <div data-rowFour class="tile robotoBold"></div>
+        <div data-rowFour class="tile robotoBold"></div>
+        <div data-rowFive class="tile robotoBold"></div>
+        <div data-rowFive class="tile robotoBold"></div>
+        <div data-rowFive class="tile robotoBold"></div>
+        <div data-rowFive class="tile robotoBold"></div>
+        <div data-rowFive class="tile robotoBold"></div>
+        <div data-rowFive class="tile robotoBold"></div>
+        <div data-rowSix class="tile robotoBold"></div>
+        <div data-rowSix class="tile robotoBold"></div>
+        <div data-rowSix class="tile robotoBold"></div>
+        <div data-rowSix class="tile robotoBold"></div>
+        <div data-rowSix class="tile robotoBold"></div>
+        <div data-rowSix class="tile robotoBold"></div>
       </div>
       <div class="keyboard" >
-        <div class="firstRow">
-          <button data-char class="robotoBold">Q</button>
-          <button data-char class="robotoBold">W</button>
-          <button data-char class="robotoBold">E</button>
-          <button data-char class="robotoBold">R</button>
-          <button data-char class="robotoBold">T</button>
-          <button data-char class="robotoBold">Y</button>
-          <button data-char class="robotoBold">U</button>
-          <button data-char class="robotoBold">I</button>
-          <button data-char class="robotoBold">O</button>
-          <button data-char class="robotoBold">P</button>
+        <div class="row">
+          <button data-char class="key robotoBold">Q</button>
+          <button data-char class="key robotoBold">W</button>
+          <button data-char class="key robotoBold">E</button>
+          <button data-char class="key robotoBold">R</button>
+          <button data-char class="key robotoBold">T</button>
+          <button data-char class="key robotoBold">Y</button>
+          <button data-char class="key robotoBold">U</button>
+          <button data-char class="key robotoBold">I</button>
+          <button data-char class="key robotoBold">O</button>
+          <button data-char class="key robotoBold">P</button>
         </div>
-        <div class="secondRow">
-          <button data-char class="robotoBold">A</button>
-          <button data-char class="robotoBold">S</button>
-          <button data-char class="robotoBold">D</button>
-          <button data-char class="robotoBold">F</button>
-          <button data-char class="robotoBold">G</button>
-          <button data-char class="robotoBold">H</button>
-          <button data-char class="robotoBold">J</button>
-          <button data-char class="robotoBold">K</button>
-          <button data-char class="robotoBold">L</button>
+        <div class="row">
+          <button data-char class="key robotoBold">A</button>
+          <button data-char class="key robotoBold">S</button>
+          <button data-char class="key robotoBold">D</button>
+          <button data-char class="key robotoBold">F</button>
+          <button data-char class="key robotoBold">G</button>
+          <button data-char class="key robotoBold">H</button>
+          <button data-char class="key robotoBold">J</button>
+          <button data-char class="key robotoBold">K</button>
+          <button data-char class="key robotoBold">L</button>
         </div>
-        <div class="thirdRow">
-          <button data-enter class="robotoBold">ENTER</button>
-          <button data-char class="robotoBold">Z</button>
-          <button data-char class="robotoBold">X</button>
-          <button data-char class="robotoBold">C</button>
-          <button data-char class="robotoBold">V</button>
-          <button data-char class="robotoBold">B</button>
-          <button data-char class="robotoBold">N</button>
-          <button data-char class="robotoBold">M</button>
-          <button data-delete class="robotoBold">DELETE</button>
+        <div class="row">
+          <button data-enter class="key enterAndDeleteKey robotoBold">ENTER</button>
+          <button data-char class="key robotoBold">Z</button>
+          <button data-char class="key robotoBold">X</button>
+          <button data-char class="key robotoBold">C</button>
+          <button data-char class="key robotoBold">V</button>
+          <button data-char class="key robotoBold">B</button>
+          <button data-char class="key robotoBold">N</button>
+          <button data-char class="key robotoBold">M</button>
+          <button data-delete class="key enterAndDeleteKey robotoBold">DELETE</button>
         </div>
-        <div class="fourthRow">
-          <svg fill="black" viewBox="0 0 24 24" 
-          xmlns="http://www.w3.org/2000/svg" transform="rotate(-90)">
-            <path d="M21,21H3L12,3Z"></path>
-          </svg>
-          <button data-space class="robotoBold">SPACE</button>
-          <svg fill="black" viewBox="0 0 24 24" 
-          xmlns="http://www.w3.org/2000/svg" transform="rotate(90)">
-            <path d="M21,21H3L12,3Z"></path>
-          </svg>
+        <div class="row">
+          <button data-left class="key leftAndRightKey">
+            <svg fill="black" viewBox="0 0 24 24" 
+            xmlns="http://www.w3.org/2000/svg" transform="rotate(-90)">
+              <path d="M21,21H3L12,3Z"></path>
+            </svg>
+          </button>
+          <button data-space class="key spaceBar robotoBold">SPACE</button>
+          <button data-right class="key leftAndRightKey">
+            <svg fill="black" viewBox="0 0 24 24" 
+            xmlns="http://www.w3.org/2000/svg" transform="rotate(90)">
+              <path d="M21,21H3L12,3Z"></path>
+            </svg>
+          </button>
         </div>
       </div>
     </div>
