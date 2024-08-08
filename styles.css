@@ -1,1 +1,102 @@
+*, *::before, *::after {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Roboto", sans-serif;
+    font-style: normal;
+}
+:root {
+    --bg: #ffffff;
+    --base: #000000;
+    --fein-guess: #000000;
+    --meh-guess: #000000;
+    --high-contrast-meh-guess: #000000;
+    --guess-text: #000000;
+    --dark: #000000; 
+}
+body {
+    background: var(--bg); 
+}
+header {
+    height: 2.75rem;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+}
+h1 {
+    border-bottom: 0.063rem solid gray;
+    max-width: 100%;
+    height: inherit;
+    font-size: 2rem;
+    text-align: center;
+    flex: 1;
+}
+header > button {
+    border: 0px;
+    border-bottom: 0.063rem solid gray;
+    width: auto;
+    height: inherit;
+    background-color: var(--bg);
+}
+header > button:hover {
+    background-color: gray;;
+}
+header > button > svg {
+    padding: 0.5rem;
+    height: inherit;
+}
+header > button > svg > path {
+    fill: var(--base);
+}
+button:hover {
+    cursor: pointer;
+}
+.robotoBold {
+    font-weight: 700;
+}
+.gameContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.guessContainer {
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
 
+}
+.guess {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+}
+.tile {
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 3.25rem;
+    height: 3.25rem;
+    max-width: 4rem;
+    max-height: 4rem;
+    font-size: 2rem;
+    border: 0.125rem solid grey;
+}
+.keyboard {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+/* 
+If i ever wanna style a link: order is:
+    link -> visited -> hover -> active 
+Use: transform: scaleX() for animation (100ms delays)
+For hint button use: cursor:not allowed when disabled
+Transition-duration for hover effects
+*/
