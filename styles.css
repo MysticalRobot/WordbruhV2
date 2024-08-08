@@ -1,1 +1,145 @@
+*, *::before, *::after {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Roboto", sans-serif;
+    font-style: normal;
+}
+:root {
+    --bg: #ffffff; /* (light dark) #ffffff #151515 */
+    --base: #000000; /* #000000 #ffffff */
+    /* correct guess */
+    --feinGuess: #fc9b66;/* doesn't change */
+    /* close guess */
+    --mehGuess: #fcd666;/* doesn't change */
+    --highContrastMehGuess: #66b1fc;/* doesn't change */
+    /* incorrect guess */
+    --ripGuess: #7d7d7d; /* #7d7d7d #474747 */
+    /* default for button/guess border */
+    --noGuess: #dcdcdc; /* #dcdcdc #7d7d7d */
+    --guessText: #ffffff; /* doesn't change */
+    --highContrastGuessText: #000000; /* doesn't change */
+    --hoverColor: #dcdcdc; /* #dcdcdc #474747 */
+}
+body {
+    background: var(--bg); 
+}
+header {
+    height: 3rem;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+}
+h1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    max-width: 100%;
+    height: inherit;
+    font-size: 2rem;
+    border-bottom: 0.063rem solid var(--noGuess);
+}
+header > button {
+    border: 0px;
+    border-bottom: 0.063rem solid var(--noGuess);
+    width: auto;
+    height: inherit;
+    background-color: var(--bg);
+}
+header > button:hover {
+    background-color: var(--hoverColor);
+}
+button > svg {
+    padding: 0.75rem;
+    height: inherit;
+}
+button > svg > path {
+    fill: var(--base);
+}
+button:hover {
+    cursor: pointer;
+}
+.robotoBold {
+    font-weight: 700;
+}
+.gameContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.guessGrid {
+    padding: 3rem;
+    display: grid;
+    gap: 0.25rem 0.25rem;
+    grid-template-columns: 3.5rem 3.5rem 3.5rem 3.5rem 3.5rem 3.5rem;
+    grid-template-rows: 3.5rem 3.5rem 3.5rem 3.5rem 3.5rem 3.5rem;
+}
+.tile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 4rem;
+    max-height: 4rem;
+    font-size: 2rem;
+    border: 0.125rem solid var(--noGuess);
+}
+.animation100MsDelay { /* UNUSED come back to this */
+    transform: scaleX(0.5);
+}
+.keyboard {
+    display: flex;
+    gap: 0.3rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.row {
+    display: flex;
+    gap: 0.3rem;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 3.25rem;
+}
+.key {
+    width: 2.75rem;
+    height: inherit;
+    border: none;
+    border-radius: 0.25rem;
+    background-color: var(--noGuess);
+    font-size: 1.25rem;
+}
+.enterAndDeleteKey {
+    width: 4.5rem;
+    font-size: 1rem;
+}
+.spaceBar {    
+    width: 15rem;
+}
+.leftAndRightKey {
+    width: 4rem;
+}
+/* Extra small devices (phones, 600px and down) 
+@media only screen and (max-width: 600px) {...}
 
+/* Small devices (portrait tablets and large phones, 600px and up) 
+@media only screen and (min-width: 600px) {...}
+
+/* Medium devices (landscape tablets, 768px and up) 
+@media only screen and (min-width: 768px) {...}
+
+/* Large devices (laptops/desktops, 992px and up) 
+@media only screen and (min-width: 992px) {...}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) 
+@media only screen and (min-width: 1200px) {...}
+
+If i ever wanna style a link: order is:
+    link -> visited -> hover -> active 
+Use: transform: scaleX() for animation (100ms delays)
+For hint button use: cursor:not allowed when disabled
+Transition-duration for hover effects
+*/

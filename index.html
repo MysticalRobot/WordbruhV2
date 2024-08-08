@@ -1,1 +1,267 @@
-
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="description" content="wanna play a freaky word guessing game?">
+    <meta name="keywords" content="words, vocabulary, game, puzzle">
+    <meta name="author" content="Dhruv Chavan">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wordbruh</title>
+    <link rel = "stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <header>
+      <button>
+        <svg aria-label="settings" viewBox="0 0 24 24" 
+        fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd" 
+          d="M13.9838 2.54161C14.0711 2.71093 14.0928 2.92777 14.1361 
+          3.36144C14.2182 4.1823 14.2593 4.59274 14.4311 4.81793C14.649 
+          5.10358 15.0034 5.25038 15.3595 5.20248C15.6402 5.16472 15.9594 
+          4.90352 16.5979 4.38113C16.9352 4.10515 17.1038 3.96716 17.2853 
+          3.90918C17.5158 3.83555 17.7652 3.84798 17.9872 3.94419C18.162 
+          4.01994 18.3161 4.17402 18.6243 4.4822L19.5178 5.37567C19.8259 
+          5.68385 19.98 5.83794 20.0558 6.01275C20.152 6.23478 20.1644 6.48415 
+          20.0908 6.71464C20.0328 6.89612 19.8948 7.06478 19.6188 
+          7.4021C19.0964 8.0406 18.8352 8.35984 18.7975 8.64056C18.7496 
+          8.99662 18.8964 9.35102 19.182 9.56893C19.4072 9.74072 19.8176 
+          9.78176 20.6385 9.86385C21.0722 9.90722 21.2891 9.92891 21.4584 
+          10.0162C21.6734 10.1272 21.841 10.3123 21.9299 10.5373C22 10.7145 
+          22 10.9324 22 11.3682V12.6319C22 13.0676 22 13.2855 21.93 13.4626C21.841 
+          13.6877 21.6734 13.8729 21.4583 13.9838C21.289 14.0711 21.0722 
+          14.0928 20.6386 14.1361L20.6386 14.1361C19.818 14.2182 19.4077 
+          14.2592 19.1825 14.4309C18.8967 14.6489 18.7499 15.0034 18.7979 
+          15.3596C18.8357 15.6402 19.0968 15.9593 19.619 16.5976C19.8949 
+          16.9348 20.0328 17.1034 20.0908 17.2848C20.1645 17.5154 20.152 
+          17.7648 20.0558 17.9869C19.98 18.1617 19.826 18.3157 19.5179 
+          18.6238L18.6243 19.5174C18.3162 19.8255 18.1621 19.9796 17.9873 
+          20.0554C17.7652 20.1516 17.5159 20.164 17.2854 20.0904C17.1039 
+          20.0324 16.9352 19.8944 16.5979 19.6184L16.5979 19.6184C15.9594 
+          19.096 15.6402 18.8348 15.3595 18.7971C15.0034 18.7492 14.649 
+          18.896 14.4311 19.1816C14.2593 19.4068 14.2183 19.8173 14.1362 
+          20.6383C14.0928 21.0722 14.0711 21.2891 13.9837 21.4585C13.8728
+          21.6735 13.6877 21.8409 13.4628 21.9299C13.2856 22 13.0676 22 
+          12.6316 22H11.3682C10.9324 22 10.7145 22 10.5373 21.9299C10.3123 
+          21.841 10.1272 21.6734 10.0162 21.4584C9.92891 21.2891 9.90722 
+          21.0722 9.86385 20.6385C9.78176 19.8176 9.74072 19.4072 9.56892 
+          19.182C9.35101 18.8964 8.99663 18.7496 8.64057 18.7975C8.35985 
+          18.8352 8.04059 19.0964 7.40208 19.6189L7.40206 19.6189C7.06473 
+          19.8949 6.89607 20.0329 6.71458 20.0908C6.4841 20.1645 6.23474 
+          20.152 6.01272 20.0558C5.8379 19.9801 5.6838 19.826 5.37561 
+          19.5178L4.48217 18.6243C4.17398 18.3162 4.01988 18.1621 3.94414 
+          17.9873C3.84794 17.7652 3.8355 17.5159 3.90913 17.2854C3.96711 
+          17.1039 4.10511 16.9352 4.3811 16.5979C4.90351 15.9594 5.16471 
+          15.6402 5.20247 15.3594C5.25037 15.0034 5.10357 14.649 4.81792 
+          14.4311C4.59273 14.2593 4.1823 14.2182 3.36143 14.1361C2.92776 
+          14.0928 2.71093 14.0711 2.54161 13.9838C2.32656 13.8728 2.15902 
+          13.6877 2.07005 13.4627C2 13.2855 2 13.0676 2 12.6318V11.3683C2 
+          10.9324 2 10.7144 2.07008 10.5372C2.15905 10.3123 2.32654 10.1272 
+          2.54152 10.0163C2.71088 9.92891 2.92777 9.90722 3.36155 
+          9.86384H3.36155H3.36156C4.18264 9.78173 4.59319 9.74068 4.81842 
+          9.56881C5.10395 9.35092 5.2507 8.99664 5.20287 8.64066C5.16514 
+          8.35987 4.90385 8.04052 4.38128 7.40182C4.10516 7.06435 3.96711 
+          6.89561 3.90914 6.71405C3.83557 6.48364 3.848 6.23438 3.94413 
+          6.01243C4.01988 5.83754 4.17403 5.68339 4.48233 5.37509L5.37565 
+          4.48177L5.37566 4.48177C5.68385 4.17357 5.83795 4.01947 6.01277 
+          3.94373C6.23478 3.84753 6.48414 3.8351 6.71463 3.90872C6.89612 
+          3.9667 7.06481 4.10472 7.4022 4.38076C8.04061 4.9031 8.35982 
+          5.16427 8.64044 5.20207C8.99661 5.25003 9.35113 5.10319 9.56907 
+          4.81742C9.74077 4.59227 9.78181 4.18195 9.86387 3.36131C9.90722 
+          2.92776 9.9289 2.71098 10.0162 2.5417C10.1271 2.32658 10.3123 
+          2.15898 10.5374 2.07001C10.7145 2 10.9324 2 11.3681 
+          2H12.6318C13.0676 2 13.2855 2 13.4627 2.07005C13.6877 2.15902 
+          13.8728 2.32656 13.9838 2.54161ZM12 16C14.2091 16 16 14.2091 
+          16 12C16 9.79086 14.2091 8 12 8C9.79086 8 8 9.79086 8 12C8 
+          14.2091 9.79086 16 12 16Z"></path>
+        </svg>
+      </button>
+      <!--
+        FOR HINT BUTTON: use "disabled" when hit or game over 
+        and toggleAttribute(element, attribute) to reinstate
+      -->
+      <button>
+        <svg aria-label="hint" viewBox="0 0 32 32" style="scale:0.9" 
+        xmlns="http://www.w3.org/2000/svg">
+          <path d="M20 24.75h-8c-0.69 0-1.25 0.56-1.25 1.25v2c0 0 0 
+          0 0 0 0 0.345 0.14 0.658 0.366 0.885l2 2c0.226 0.226 0.538 
+          0.365 0.883 0.365 0 0 0.001 0 0.001 0h4c0 0 0.001 0 0.002 
+          0 0.345 0 0.657-0.14 0.883-0.365l2-2c0.226-0.226 0.365-0.538 
+          0.365-0.883 0-0.001 0-0.001 0-0.002v0-2c-0.001-0.69-0.56-1.249-1.25-1.25h-0zM18.75 
+          27.482l-1.268 1.268h-2.965l-1.268-1.268v-0.232h5.5zM25.377 
+          6.358c-1.919-3.252-5.328-5.447-9.263-5.644l-0.027-0.001h-0.071c-3.934 
+          0.165-7.338 2.292-9.274 5.423l-0.028 0.049c-1.17 1.687-1.869 
+          3.777-1.869 6.031 0 0.012 0 0.025 0 0.037v-0.002c0.184 2.294 
+          0.923 4.383 2.081 6.176l-0.032-0.052c0.322 0.555 0.664 1.102 
+          1.006 1.646 0.671 0.991 1.314 2.13 1.862 3.322l0.062 0.151c0.194
+          0.455 0.637 0.768 1.153 0.768 0 0 0.001 0 0.001 0h-0c0.173-0 
+          0.338-0.035 0.489-0.099l-0.008 0.003c0.455-0.194 0.768-0.638 
+          0.768-1.155 0-0.174-0.036-0.34-0.1-0.49l0.003 
+          0.008c-0.669-1.481-1.374-2.739-2.173-3.929l0.060 
+          0.095c-0.327-0.523-0.654-1.044-0.962-1.575-0.939-1.397-1.557-3.083-1.71-4.901l-0.003-0.038c0.019-1.735 
+          0.565-3.338 1.485-4.662l-0.018 0.027c1.512-2.491 4.147-4.17 
+          7.185-4.332l0.022-0.001h0.052c3.071 
+          0.212 5.697 1.934 7.162 4.423l0.023 0.042c0.864 1.293 1.378 
+          2.883 1.378 4.593 0 0.053-0 0.107-0.002 0.16l0-0.008c-0.22 
+          1.839-0.854 3.496-1.807 4.922l0.026-0.041c-0.287 0.487-0.588 
+          0.968-0.889 1.446-0.716 1.066-1.414 2.298-2.020 3.581l-0.074 
+          0.175c-0.067 0.148-0.106 0.321-0.106 0.503 0 0.69 0.56 1.25 
+          1.25 1.25 0.512 0 0.952-0.308 1.146-0.749l0.003-0.008c0.625-1.33 
+          1.264-2.452 1.978-3.52l-0.060 0.096c0.313-0.498 0.625-0.998 
+          0.924-1.502 1.131-1.708 1.891-3.756 2.12-5.961l0.005-0.058c0.003-0.098 
+          0.005-0.213 0.005-0.329 0-2.184-0.654-4.216-1.778-5.91l0.025 
+          0.040zM15.139 5.687c-0.199-0.438-0.633-0.737-1.136-0.737-0.188 
+          0-0.365 0.041-0.525 0.116l0.008-0.003c-2.463 1.415-4.215 
+          3.829-4.711 6.675l-0.008 0.057c-0.011 0.061-0.017 0.132-0.017 
+          0.204 0 0.617 0.447 1.129 1.035 1.231l0.007 0.001c0.063 0.011 
+          0.135 0.018 0.209 0.018h0c0.615-0.001 1.126-0.446 1.23-1.031l0.001-0.008c0.366-2.067 
+          1.575-3.797 3.252-4.852l0.030-0.017c0.437-0.2 0.735-0.634 0.735-1.138 
+          0-0.187-0.041-0.364-0.115-0.523l0.003 0.008z"></path>
+        </svg>
+      </button>
+      <h1 class="roboto-bold">Wordbruh</h1>
+      <button aria-label="how to play">
+        <svg id="howTo" viewBox="0 0 24 24" style="scale:0.9" 
+        xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M10.661 
+          7.86213C10.4142 8.04749 10.25 8.31328 10.25 8.75C10.25 
+          9.30228 9.80229 9.75 9.25 9.75C8.69772 9.75 8.25 9.30228 
+          8.25 8.75C8.25 7.68672 8.70818 6.82751 9.46005 6.26288C10.1787 
+          5.72317 11.0967 5.5 12 5.5C13.0779 5.5 13.987 5.82418 14.6436
+          6.44499C15.2951 7.06101 15.6046 7.88116 15.6531 8.7005C15.7483 
+          10.3042 14.864 12.0687 13.2461 12.9932C13.099 13.0773 13.008 
+          13.1462 12.9529 13.1958C13.0783 13.5886 12.9509 14.0345 12.6034
+          14.2974C12.163 14.6307 11.5359 14.5438 11.2026 14.1034C11.2026 
+          14.1034 11.2031 14.1041 11.2016 14.1021L11.2005 14.1007C10.9606 
+          13.778 10.865 13.355 10.9137 12.9585C10.9974 12.277 11.4727 
+          11.7031 12.2539 11.2568C13.2157 10.7071 13.7065 9.65911 
+          13.6567 8.8189C13.6328 8.41625 13.4898 8.10656 13.2695 
+          7.89822C13.0542 7.69468 12.6721 7.5 12 7.5C11.3981 7.5 10.9411 
+          7.65183 10.661 7.86213Z"></path> 
+          <path d="M12 18.5C12.8284 18.5 13.5 17.8284 13.5 17C13.5 16.1716 
+          12.8284 15.5 12 15.5C11.1716 15.5 10.5 16.1716 10.5 17C10.5 
+          17.8284 11.1716 18.5 12 18.5Z"></path> 
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M1 12C1 5.92487 
+          5.92487 1 12 1C18.0751 1 23 5.92487 23 12C23 18.0751 18.0751 
+          23 12 23C5.92487 23 1 18.0751 1 12ZM12 3C7.02944 3 3 7.02944 3
+          12C3 16.9706 7.02944 21 12 21C16.9706 21 21 16.9706 21 12C21 
+          7.02944 16.9706 3 12 3Z"></path>
+        </svg>
+      </button>
+      <button>
+        <svg aria-label="account" viewBox="0 0 24 24" style="scale:1.1" 
+        xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 
+          10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 
+          3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 
+          4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"></path>
+        </svg>
+      </button>
+    </header>
+    <div class="gameContainer">
+      <div class="guessGrid">
+        <div data-rowOne class="tile robotoBold">B</div>
+        <div data-rowOne class="tile robotoBold">U</div>
+        <div data-rowOne class="tile robotoBold">S</div>
+        <div data-rowOne class="tile robotoBold">S</div>
+        <div data-rowOne class="tile robotoBold">S</div>
+        <div data-rowOne class="tile robotoBold">S</div>
+        <div data-rowTwo class="tile robotoBold"></div>
+        <div data-rowTwo class="tile robotoBold"></div>
+        <div data-rowTwo class="tile robotoBold"></div>
+        <div data-rowTwo class="tile robotoBold"></div>
+        <div data-rowTwo class="tile robotoBold"></div>
+        <div data-rowTwo class="tile robotoBold"></div>
+        <div data-rowThree class="tile robotoBold"></div>
+        <div data-rowThree class="tile robotoBold"></div>
+        <div data-rowThree class="tile robotoBold"></div>
+        <div data-rowThree class="tile robotoBold"></div>
+        <div data-rowThree class="tile robotoBold"></div>
+        <div data-rowThree class="tile robotoBold"></div>
+        <div data-rowFour class="tile robotoBold"></div>
+        <div data-rowFour class="tile robotoBold"></div>
+        <div data-rowFour class="tile robotoBold"></div>
+        <div data-rowFour class="tile robotoBold"></div>
+        <div data-rowFour class="tile robotoBold"></div>
+        <div data-rowFour class="tile robotoBold"></div>
+        <div data-rowFive class="tile robotoBold"></div>
+        <div data-rowFive class="tile robotoBold"></div>
+        <div data-rowFive class="tile robotoBold"></div>
+        <div data-rowFive class="tile robotoBold"></div>
+        <div data-rowFive class="tile robotoBold"></div>
+        <div data-rowFive class="tile robotoBold"></div>
+        <div data-rowSix class="tile robotoBold"></div>
+        <div data-rowSix class="tile robotoBold"></div>
+        <div data-rowSix class="tile robotoBold"></div>
+        <div data-rowSix class="tile robotoBold"></div>
+        <div data-rowSix class="tile robotoBold"></div>
+        <div data-rowSix class="tile robotoBold"></div>
+      </div>
+      <div class="keyboard" >
+        <div class="row">
+          <button data-char class="key robotoBold">Q</button>
+          <button data-char class="key robotoBold">W</button>
+          <button data-char class="key robotoBold">E</button>
+          <button data-char class="key robotoBold">R</button>
+          <button data-char class="key robotoBold">T</button>
+          <button data-char class="key robotoBold">Y</button>
+          <button data-char class="key robotoBold">U</button>
+          <button data-char class="key robotoBold">I</button>
+          <button data-char class="key robotoBold">O</button>
+          <button data-char class="key robotoBold">P</button>
+        </div>
+        <div class="row">
+          <button data-char class="key robotoBold">A</button>
+          <button data-char class="key robotoBold">S</button>
+          <button data-char class="key robotoBold">D</button>
+          <button data-char class="key robotoBold">F</button>
+          <button data-char class="key robotoBold">G</button>
+          <button data-char class="key robotoBold">H</button>
+          <button data-char class="key robotoBold">J</button>
+          <button data-char class="key robotoBold">K</button>
+          <button data-char class="key robotoBold">L</button>
+        </div>
+        <div class="row">
+          <button data-enter class="key enterAndDeleteKey robotoBold">ENTER</button>
+          <button data-char class="key robotoBold">Z</button>
+          <button data-char class="key robotoBold">X</button>
+          <button data-char class="key robotoBold">C</button>
+          <button data-char class="key robotoBold">V</button>
+          <button data-char class="key robotoBold">B</button>
+          <button data-char class="key robotoBold">N</button>
+          <button data-char class="key robotoBold">M</button>
+          <button data-delete class="key enterAndDeleteKey robotoBold">DELETE</button>
+        </div>
+        <div class="row">
+          <button data-left class="key leftAndRightKey">
+            <svg fill="black" viewBox="0 0 24 24" 
+            xmlns="http://www.w3.org/2000/svg" transform="rotate(-90)">
+              <path d="M21,21H3L12,3Z"></path>
+            </svg>
+          </button>
+          <button data-space class="key spaceBar robotoBold">SPACE</button>
+          <button data-right class="key leftAndRightKey">
+            <svg fill="black" viewBox="0 0 24 24" 
+            xmlns="http://www.w3.org/2000/svg" transform="rotate(90)">
+              <path d="M21,21H3L12,3Z"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+<!--TO DO:
+  High contrast mode shares secondary color but changes primary and foreground
+  Create favicon
+  Word animation is literally squeezing to death and re-expanding
+  Use addAttribute -> class="rip/meh/fein" to change appearance of answer and...
+    button letters after being used
+  For the hint have an alert that tells to check the keyboard for revealed letter
+  Use placeholder attribute for sign in form
+  Use mp3 for sound bites and create some time of alert to unmute the game
+  Utilize local and session storage
+-->
