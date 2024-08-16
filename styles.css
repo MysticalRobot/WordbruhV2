@@ -4,25 +4,229 @@
     box-sizing: border-box;
     font-family: "Roboto", sans-serif;
     font-style: normal;
+    overflow: none;
 }
 :root {
-    --bg: #ffffff; /* (light dark) #ffffff #151515 */
-    --base: #000000; /* #000000 #ffffff */
+    --bgColor: #ffffff; /* (light dark) #ffffff #151515 */
+    --baseColor: #000000; /* #000000 #ffffff */
+    --alertBGColor: #151515; /* #151515 #ffffff */
+    --alertFontColor: #ffffff; /* #ffffff #000000 */
     /* correct guess */
-    --feinGuess: #fc9b66;/* doesn't change */
+    --feinGuessColor: #fc6666;/* doesn't change */
     /* close guess */
-    --mehGuess: #fcd666;/* doesn't change */
-    --highContrastMehGuess: #66b1fc;/* doesn't change */
+    --mehGuessColor: #fcd666;/* doesn't change */
+    --highContrastFeinGuessColor: #66b1fc;/* doesn't change */
+    --highContrastMehGuessColor: #66b1fc;/* doesn't change */
     /* incorrect guess */
-    --ripGuess: #7d7d7d; /* #7d7d7d #474747 */
+    --ripGuessColor: #7d7d7d; /* #7d7d7d #474747 */
     /* default for button/guess border */
-    --noGuess: #dcdcdc; /* #dcdcdc #7d7d7d */
-    --guessText: #ffffff; /* doesn't change */
-    --highContrastGuessText: #000000; /* doesn't change */
+    --noGuessColor: #dcdcdc; /* #dcdcdc #7d7d7d */
+    --guessTextColor: #ffffff; /* doesn't change */
+    --highContrastGuessTextColor: #000000; /* doesn't change */
     --hoverColor: #dcdcdc; /* #dcdcdc #474747 */
+    --landingBGColor: #e2e2e2;
+    --overlayColor: #ffffff75; /* #ffffff75 #00000075 */
+    --fadedOverlayColor: #ffffff00; /* #ffffff00 #00000000 */
+    --fadeTiming: 150ms;
+    --slowFadeTiming: 200ms;
+}
+button:hover {
+    cursor: pointer;
+}
+.robotoExtraLight {
+    font-weight: 300;
+}
+.robotoLight {
+    font-weight: 400;
+}
+.robotoMedium {
+    font-weight: 500;
+}
+.robotoBold {
+    font-weight: 700;
+}
+@keyframes fadeOut {
+    0% {opacity: 1;}
+    100% {opacity: 0;}
+}
+@keyframes overlayFadeIn {
+    0% {background-color: var(--fadedOverlayColor)}
+    100% {background-color: var(--overlayColor);}
+}
+@keyframes overlayFadeOut {
+    0% {background-color: var(--overlayColor)}
+    100% {background-color: var(--fadedOverlayColor);}
+}
+@keyframes popUpFadeIn {
+    0% {opacity: 0%; translate: 0rem 2rem;}
+    100% {opacity: 100%; translate: 0rem 0rem;}
+}
+@keyframes popUpFadeOut {
+    0% {opacity: 1; translate: 0rem 0rem;}
+    100% {opacity: 0; translate: 0rem -10rem;}
+}
+@keyframes toggleOn {
+    0% {translate: 0rem}
+    100% {translate: 0.85rem}
+}
+@keyframes toggleOff {
+    0% {translate: 0rem}
+    100% {translate: -0.85rem}
+}
+.fadingElement {
+    animation-name: fadeOut;
+    animation-timing-function: ease-out;
+    animation-duration: var(--slowFadeTiming);
+}
+.landingScreen {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--landingBGColor);
+}
+.landingPrompt {
+    font-size: 1.4rem;
+    text-align: center;
+    padding: 1rem;
+}
+.landingButtons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-self: center;
+}
+@media only screen and (max-width: 750px) {
+    .landingButtons {
+        flex-direction: column;
+    }
+}
+.landingButton {
+    width: 10rem;
+    height: 3.2rem;
+    margin: 0.3rem;
+    border-radius: 2rem;
+    border-width: 0.1rem;
+    font-size: 1rem;
+    border-color: #000000;
+    background-color: var(--landingBGColor);
+}
+.darkLandingButton {
+    background-color: #000000;
+    color: #ffffff;
+}
+.gameScreen {
+    display: block;
+}
+.overlay {
+    display: none; /* flex */
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    z-index: 10;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--overlayColor);
+    animation-name: overlayFade;
+    animation-duration: var(--fadeTiming); 
+}
+.popUp {
+    display: flex;
+    position: absolute;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: inherit + 1;
+    background-color: var(--bgColor);
+    box-shadow: 0rem 0rem 1rem 0.125rem #00000025;
+    border-radius: 0.3rem;
+    animation-name: popUpFadeIn;
+    animation-duration: var(--fadeTiming); 
+    animation-timing-function: ease-in;
+}
+.settings {
+    width: 32rem;
+    height: 19rem;
+    padding: 0.25rem;
+}
+.settingsHeader {
+    display: block;
+    width: inherit;
+    height: 3rem;
+}
+.settingsTitle {
+    text-align: center;
+    height: inherit;
+    padding-top: 0.25rem;
+    font-size: 1.4rem;
+}
+.settingsExitButton {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    height: 1.25rem;
+    border: none;
+    background-color: var(--bgColor);
+}
+.settingsExitButton > svg {
+    padding: 0.75;
+    height: inherit;
+}
+.settingsExitButton > svg > path {
+    fill: var(--baseColor);
+}
+.settingsSection {
+    display: flex;
+    justify-content: space-between;
+    width: 92%;
+    border-bottom: 0.063rem solid var(--noGuessColor);
+    padding-top: 0.6rem;
+    padding-bottom: 0.6rem;
+}
+.settingsTextContainer {
+    font-size: 0.9rem;
+}
+.lastSettingsSection {
+    border: none;
+}
+.settingsToggle {
+    display: flex;
+    justify-content: flex-start;
+    align-self: center;
+    border: none;
+    width: 2.4rem;; /* 2, 1.25 */
+    height: 1.5rem;
+    border-radius: 1rem;
+    background-color: #7d7d7d; /* usable-unusable #7d7d7d #dcdcdc */
+}
+.settingsToggle > svg {
+    align-self: center;
+    height: inherit;
+    animation-duration: 300ms;
+    animation-name: toggleOn; /* change name, bg color, justify content */
+}
+.settingsToggle > svg > path {
+    fill: #ffffff;
+}
+.howTo {
+    display: none;
+    width: 32rem;
+    height: 41rem;
+}
+.signIn {
+    display: none;
+    width: 32rem;
+    height: 41rem;
+}
+.stats {
+    display: none;
+    width: 32rem;
+    height: 41rem;
 }
 body {
-    background: var(--bg); 
+    background: var(--bgColor); 
 }
 header {
     height: 3rem;
@@ -30,8 +234,9 @@ header {
     flex-wrap: nowrap;
     justify-content: center;
     align-items: center;
+    color: var(--baseColor);
 }
-h1 {
+.title {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -39,36 +244,63 @@ h1 {
     max-width: 100%;
     height: inherit;
     font-size: 2rem;
-    border-bottom: 0.063rem solid var(--noGuess);
+    border-bottom: 0.063rem solid var(--noGuessColor);
 }
 header > button {
     border: 0px;
-    border-bottom: 0.063rem solid var(--noGuess);
+    border-bottom: 0.063rem solid var(--noGuessColor);
     width: auto;
     height: inherit;
-    background-color: var(--bg);
+    background-color: var(--bgColor);
 }
 header > button:hover {
     background-color: var(--hoverColor);
 }
-button > svg {
+.disabledHeaderButton {
+    background-color: var(--bgColor) !important;   
+}
+[aria-disabled="true"]:hover {
+    cursor: not-allowed;
+}
+.gameScreenSVGButton > svg {
     padding: 0.75rem;
     height: inherit;
 }
-button > svg > path {
-    fill: var(--base);
-}
-button:hover {
-    cursor: pointer;
-}
-.robotoBold {
-    font-weight: 700;
+.gameScreenSVGButton > svg > path {
+    fill: var(--baseColor);
 }
 .gameContainer {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+.alertList {
+    display: none; /* flex */
+    position: fixed;
+    width: 100vw;
+    height: 100vw;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding-top: 3.1rem;
+    z-index: 69; /* nice */
+}
+.alert {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+    width: 8rem;
+    height: 2.75rem;
+    border-radius: 0.2rem;
+    background-color: var(--baseColor);
+    color: var(--alertFontColor);
+    text-align: center;
+    font-size: 0.95rem;
+}
+.dummyAlert {
+    display: None;
 }
 .guessGrid {
     padding: 3rem;
@@ -84,9 +316,13 @@ button:hover {
     max-width: 4rem;
     max-height: 4rem;
     font-size: 2rem;
-    border: 0.125rem solid var(--noGuess);
+    border: 0.125rem solid var(--noGuessColor);
+    color: var(--baseColor);
 }
-.animation100MsDelay { /* UNUSED come back to this */
+.selected {
+    border-color: var(--ripGuessColor);
+}
+.animation100MsDelay { /* TODO come back to this */
     transform: scaleX(0.5);
 }
 .keyboard {
@@ -109,8 +345,21 @@ button:hover {
     height: inherit;
     border: none;
     border-radius: 0.25rem;
-    background-color: var(--noGuess);
+    background-color: var(--noGuessColor);
     font-size: 1.25rem;
+    color: var(--baseColor);
+}
+.rip {
+    background-color: var(--ripGuessColor);
+    border-color: var(--ripGuessColor);
+}
+.meh {
+    background-color: var(--mehGuessColor);
+    border-color: var(--mehGuessColor);
+}
+.fein {
+    background-color: var(--feinGuessColor);
+    border-color: var(--feinGuessColor);
 }
 .enterAndDeleteKey {
     width: 4.5rem;
@@ -137,8 +386,6 @@ button:hover {
 /* Extra large devices (large laptops and desktops, 1200px and up) 
 @media only screen and (min-width: 1200px) {...}
 
-If i ever wanna style a link: order is:
-    link -> visited -> hover -> active 
 Use: transform: scaleX() for animation (100ms delays)
 For hint button use: cursor:not allowed when disabled
 Transition-duration for hover effects
