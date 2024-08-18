@@ -13,7 +13,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <script src="script.js" defer="true"></script>
   </head>
-  <body>
+  <body class="light normalContrast">
     <div id="landingScreen" class="landingScreen">
       <div></div>
       <h1 id="greeting" class="greeting robotoBold">Hey Bruh</h1>
@@ -32,11 +32,11 @@
         <button id="seeStatsButton" class="landingButton darkLandingButton robotoLight">See stats</button>
       </div>
     </div>
-    <div class="overlay">
+    <div id="overlay" class="overlay">
       <div id="settings" class="popUp settings">
         <div class="settingsHeader">
           <h2 class="settingsTitle robotoMedium">Settings</h2>
-          <button class="settingsExitButton" aria-label="exitButton">
+          <button id="settingsExitButton" class="settingsExitButton" aria-label="exitButton">
             <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
               <path d="M0 14.545L1.455 16 8 9.455 14.545 16 16 14.545 9.455 8 16 
               1.455 14.545 0 8 6.545 1.455 0 0 1.455 6.545 8z" fill-rule="evenodd">
@@ -250,13 +250,11 @@
         </button>
       </header>
       <ul id="alertList" class="alertList">
-        <li class="alert">not in word list</li>
-        <li class="alert">no spaces pls..</li>
-        <li id="dummyAlert" class="dummyAlert alert"></li>
+        <li id="dummyAlert" class="dummyAlert alert">my name is John Cena</li>
       </ul>
       <div class="gameContainer">
         <div data-guesses class="guessGrid">
-          <div class="tile robotoBold"></div>
+          <div class="tile robotoBold animation100MsDelay"></div>
           <div class="tile robotoBold"></div>
           <div class="tile robotoBold"></div>
           <div class="tile robotoBold"></div>

@@ -1,6 +1,6 @@
 "use strict";
 class Wordbruh {
-  constructor(target, notGuessed, over, running, previousGuesses) {
+  constructor(target, notGuessed, over, previousGuesses) {
     this.target = target; // (string) word to be guessed
     this.targetMap = new Map(); // (map) target letter-[occurences]
     for (let i = 0; i < 6; i++) {
@@ -13,10 +13,16 @@ class Wordbruh {
     }
     this.notGuessed = notGuessed; // (array) indices of letters not guessed yet
     this.over = over; // (boolean)
-    this.running = running; // (boolean)
     this.previousGuesses = previousGuesses; // (array) prev guesses
     this.currentGuess = [" ", " ", " ", " ", " ", " "]; // (array) current guesses
     this.tileIndex = 0; // (float) current tile index
+    this.alertCount = 0;
+    this.running = false; // (boolean)
+    this.settingsOpen = false;
+    this.howToOpen = false;
+    this.accountOpen = false;
+    this.light = true;
+    this.highContrast = false;
   }
 
   checkAnswer() {
@@ -91,9 +97,9 @@ class Wordbruh {
   displayHint() {
     const notGuessed = new Set(this.notGuessed);
     for (let i = 0; i < 6; i++) {
-      if (!notGuessed.has(i)) {
+      if (notGuessed.has(i)) {
         this.updateCharButton(mappedCharButtons.get(this.target.charAt(i)));
-        this.notGuessed.push(i)
+        this.notGuessed.splice(this.notGuessed.indexOf(i), 1);
         // TODO: alert, animation (same as entering letter)
         break;
       }
@@ -102,11 +108,8 @@ class Wordbruh {
   }
 }
 
-// document colors
-const rootVariables = document.querySelector(':root');
-const colors = getComputedStyle(rootVariables);
-// colors.getPropertyValue(--bruh)
-// colors.setProperty(--bruh, #yomama)
+// fein color
+const feinGuessColor = "#5fa7ef";
 
 // landing screen elements
 const landingScreen = document.getElementById('landingScreen');
@@ -115,8 +118,17 @@ const playButton = document.getElementById('playButton');
 const continueButton = document.getElementById('continueButton');
 const seeStatsButton = document.getElementById('seeStatsButton');
 
+// pop up elements
+const overlay = document.getElementById('overlay');
+const settings = document.getElementById('settings');
+const settingsExitButton = document.getElementById('settingsExitButton');
+
+// big body
+const body = document.getElementsByName("body");
+
 // game screen elements
 const gameScreen = document.getElementById('gameScreen');
+const alertList = document.getElementById('alertList');
 const settingsButton = document.getElementById('settingsButton');
 const hintButton = document.getElementById('hintButton');
 const howToButton = document.getElementById('howToButton');
@@ -133,22 +145,64 @@ const spaceButton = document.querySelector('[data-space]');
 // makes it easy to check if a valid key was pressed
 const otherButtons = new Set(["BACKSPACE", "ENTER", "ARROWLEFT", "ARROWRIGHT", " "]);
 const guesses = document.querySelector('[data-guesses]'); // holds all game tiles
-const game = new Wordbruh("SCARAB", [0, 1, 2, 3, 4, 5], false, true, []);
+const game = new Wordbruh("SCARAB", [0, 1, 2, 3, 4, 5], false, []);
 
 function loadGame() {
   // TODO
 }
 
-function removeLandingScreen() {
+function showSettings() {
+  console.log("open sesame");
+  overlay.style.display = "flex"
+  overlay.classList.add('overlayFadeIn');
+  settings.classList.add('popUpFadeIn');
+  setTimeout(() => {
+   game.running = false;
+   game.settingsOpen = true;
+  }, 150);
+}
+
+function hideSettings() {
+  console.log("close sesame");
+  overlay.classList.replace('overlayFadeIn', 'overlayFadeOut');
+  settings.classList.replace('popUpFadeIn', 'popUpFadeOut');
+  setTimeout(() => {
+   overlay.classList.remove('overlayFadeOut');
+   settings.classList.remove("popUpFadeOut");
+   overlay.style.display = "none"
+   game.running = true;
+   game.settingsOpen = false;
+  }, 150);
+}
+
+function switchToGameScreen() {
   landingScreen.classList.add('fadingElement');
   setTimeout(() => {
    landingScreen.style.display = "none";
    landingScreen.classList.remove("fadingElement");
+   gameScreen.style.display = "block";
+   game.running = true;
   }, 200);
 }
 
 async function showAlert(text) {
-  return;
+  console.log(text);
+  if (game.alertCount >= 9) {
+    return;
+  }
+  const newAlert = document.createElement("li");
+  const alertText = document.createTextNode(text);
+  newAlert.appendChild(alertText);
+  newAlert.classList.add("alert");
+  const firstChild = alertList.firstChild;
+  alertList.insertBefore(newAlert, firstChild);
+  game.alertCount++;
+  await new Promise((resolve) => {
+    setTimeout(() => {
+      alertList.removeChild(newAlert);
+      game.alertCount--;
+    }, 1650);
+  });
 }
 
 function disableHintButton() {
@@ -174,35 +228,45 @@ function endGame() {
   disableKeyboard();
 }
 
-landingLogInButton.addEventListener('click', button => {
-  removeLandingScreen();
+landingLogInButton.addEventListener('click', () => {
 });
 
-playButton.addEventListener('click', button => {
-  removeLandingScreen();
+playButton.addEventListener('click', () => {
+  switchToGameScreen();
 });
 
-continueButton.addEventListener('click', button => {
-  removeLandingScreen();
+continueButton.addEventListener('click', () => {
+  switchToGameScreen();
 });
 
-seeStatsButton.addEventListener('click', button => {
-  removeLandingScreen();
+seeStatsButton.addEventListener('click', () => {
+  switchToGameScreen();
 });
 
-settingsButton.addEventListener('click', button => {
+overlay.addEventListener('click', (event) => {
+  if (game.settingsOpen && event.target == overlay) {
+    hideSettings();
+  }
 });
 
-hintButton.addEventListener('click', button => {
+settingsButton.addEventListener('click', () => {
+  showSettings();
+});
+
+settingsExitButton.addEventListener('click', () => {
+  hideSettings();
+});
+
+hintButton.addEventListener('click', () => {
     if (game.running && !game.over) {
       game.displayHint();
     }
 }, { once: true });
 
-howToButton.addEventListener('click', button => {
+howToButton.addEventListener('click', () => {
 });
 
-accountButton.addEventListener('click', button => {
+accountButton.addEventListener('click', () => {
 });
 
 window.addEventListener("load", () => {
@@ -254,31 +318,31 @@ charButtons.forEach(button => {
   });
 });
 
-enterButton.addEventListener('click', button => {
+enterButton.addEventListener('click', () => {
   if (game.running && !game.over) {
     game.checkAnswer();
   }
 });
 
-deleteButton.addEventListener('click', button => {
+deleteButton.addEventListener('click', () => {
   if (game.running && !game.over) {
     game.updateTile(Math.max(game.tileIndex - 1, 0), " ");
   }
 });
 
-leftButton.addEventListener('click', button => {
+leftButton.addEventListener('click', () => {
   if (game.running && !game.over) {
     game.updateTile(Math.max(game.tileIndex - 1, 0), "");
   }
 });
 
-rightButton.addEventListener('click', button => {
+rightButton.addEventListener('click', () => {
   if (game.running && !game.over) {
     game.updateTile(Math.min(game.tileIndex + 1, 5), "");
   }
 });
 
-spaceButton.addEventListener('click', button => {
+spaceButton.addEventListener('click', () => {
   if (game.running && !game.over) {
     game.updateTile(Math.min(game.tileIndex + 1, 5), " ");
   }

@@ -1,34 +1,48 @@
 *, *::before, *::after {
-    padding: 0;
-    margin: 0;
+    padding: 0rem;
+    margin: 0rem;
     box-sizing: border-box;
     font-family: "Roboto", sans-serif;
     font-style: normal;
-    overflow: none;
+    overflow-x: hidden;
 }
 :root {
-    --bgColor: #ffffff; /* (light dark) #ffffff #151515 */
-    --baseColor: #000000; /* #000000 #ffffff */
-    --alertBGColor: #151515; /* #151515 #ffffff */
-    --alertFontColor: #ffffff; /* #ffffff #000000 */
-    /* correct guess */
-    --feinGuessColor: #fc6666;/* doesn't change */
-    /* close guess */
-    --mehGuessColor: #fcd666;/* doesn't change */
-    --highContrastFeinGuessColor: #66b1fc;/* doesn't change */
-    --highContrastMehGuessColor: #66b1fc;/* doesn't change */
-    /* incorrect guess */
-    --ripGuessColor: #7d7d7d; /* #7d7d7d #474747 */
-    /* default for button/guess border */
-    --noGuessColor: #dcdcdc; /* #dcdcdc #7d7d7d */
-    --guessTextColor: #ffffff; /* doesn't change */
-    --highContrastGuessTextColor: #000000; /* doesn't change */
-    --hoverColor: #dcdcdc; /* #dcdcdc #474747 */
+    --feinGuessColor: #5fa7ef ; /* correct guess */
     --landingBGColor: #e2e2e2;
-    --overlayColor: #ffffff75; /* #ffffff75 #00000075 */
-    --fadedOverlayColor: #ffffff00; /* #ffffff00 #00000000 */
-    --fadeTiming: 150ms;
-    --slowFadeTiming: 200ms;
+}
+.normalContrast {
+    --mehGuessColor: #e8c55e; /* close guess */
+    --mehAndFeinTextColor: #ffffff;
+}
+.highContrast {
+    --mehGuessColor:  #ec6060;
+    --mehAndFeinTextColor: #000000;
+}
+.light {
+    --bgColor: #ffffff;
+    --baseColor: #000000;
+    --alertBGColor: #151515;
+    --alertFontColor: #ffffff;
+    --ripGuessColor: #7d7d7d; /* incorrect guess */
+    --noGuessColor: #dcdcdc;
+    --noGuessTextColor: #000000;
+    --ripTextColor: #ffffff;
+    --hoverColor: #dcdcdc;
+    --overlayColor: #ffffff75;
+    --fadedOverlayColor: #ffffff00;
+}
+.dark {
+    --bgColor: #151515;
+    --baseColor: #ffffff;
+    --alertBGColor: #ffffff;
+    --alertFontColor: #000000;
+    --ripGuessColor: #474747;
+    --noGuessColor: #7d7d7d;
+    --noGuessTextColor: #ffffff; 
+    --ripTextColor: #ffffff;
+    --hoverColor: #474747;
+    --overlayColor: #00000075;
+    --fadedOverlayColor: #00000000;
 }
 button:hover {
     cursor: pointer;
@@ -58,32 +72,36 @@ button:hover {
     100% {background-color: var(--fadedOverlayColor);}
 }
 @keyframes popUpFadeIn {
-    0% {opacity: 0%; translate: 0rem 2rem;}
-    100% {opacity: 100%; translate: 0rem 0rem;}
+    0% {opacity: 0; transform: translateY(3rem);}
+    100% {opacity: 1; transform: translateY(0rem);}
 }
 @keyframes popUpFadeOut {
-    0% {opacity: 1; translate: 0rem 0rem;}
-    100% {opacity: 0; translate: 0rem -10rem;}
+    0% {opacity: 1; transform: translateY(0rem);}
+    100% {opacity: 0; transform: translateY(3rem);}
 }
 @keyframes toggleOn {
-    0% {translate: 0rem}
-    100% {translate: 0.85rem}
+    0% {transform: translateX(0rem);}
+    100% {transform: translateX(0.85rem);}
 }
 @keyframes toggleOff {
-    0% {translate: 0rem}
-    100% {translate: -0.85rem}
+    0% {transform: translateX(0.85rem);}
+    100% {transform: translateX(0rem);}
+}
+@keyframes selectTile {
+    0% {transform: scale(1, 1);}
+    50% {transform: scale(1.1, 1.1);}
+    100% {transform: scale(1, 1);}
 }
 .fadingElement {
     animation-name: fadeOut;
     animation-timing-function: ease-out;
-    animation-duration: var(--slowFadeTiming);
+    animation-duration: 200ms;
 }
 .landingScreen {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 100vw;
     height: 100vh;
     background-color: var(--landingBGColor);
 }
@@ -107,10 +125,10 @@ button:hover {
     width: 10rem;
     height: 3.2rem;
     margin: 0.3rem;
+    font-size: 1rem;
+    border: 1rem solid #000000;
     border-radius: 2rem;
     border-width: 0.1rem;
-    font-size: 1rem;
-    border-color: #000000;
     background-color: var(--landingBGColor);
 }
 .darkLandingButton {
@@ -121,16 +139,24 @@ button:hover {
     display: block;
 }
 .overlay {
-    display: none; /* flex */
+    display: none;
     position: fixed;
-    width: 100vw;
-    height: 100vh;
-    z-index: 10;
+    z-index: 21;
+    width: 100%;
+    height: 100%;
     justify-content: center;
     align-items: center;
     background-color: var(--overlayColor);
-    animation-name: overlayFade;
-    animation-duration: var(--fadeTiming); 
+}
+.overlayFadeIn {
+    animation-name: overlayFadeIn;
+    animation-duration: 200ms; 
+    animation-timing-function: ease-out;
+}
+.overlayFadeOut {
+    animation-name: overlayFadeOut;
+    animation-duration: 200ms; 
+    animation-timing-function: ease-out;
 }
 .popUp {
     display: flex;
@@ -142,9 +168,16 @@ button:hover {
     background-color: var(--bgColor);
     box-shadow: 0rem 0rem 1rem 0.125rem #00000025;
     border-radius: 0.3rem;
+}
+.popUpFadeIn {
     animation-name: popUpFadeIn;
-    animation-duration: var(--fadeTiming); 
-    animation-timing-function: ease-in;
+    animation-duration: 200ms; 
+    animation-timing-function: ease-out;
+}
+.popUpFadeOut {
+    animation-name: popUpFadeOut;
+    animation-duration: 200ms; 
+    animation-timing-function: ease-out;
 }
 .settings {
     width: 32rem;
@@ -204,6 +237,8 @@ button:hover {
 .settingsToggle > svg {
     align-self: center;
     height: inherit;
+}
+.toggleOn {
     animation-duration: 300ms;
     animation-name: toggleOn; /* change name, bg color, justify content */
 }
@@ -229,31 +264,26 @@ body {
     background: var(--bgColor); 
 }
 header {
-    height: 3rem;
     display: flex;
-    flex-wrap: nowrap;
-    justify-content: center;
-    align-items: center;
+    height: 3rem;
     color: var(--baseColor);
 }
 .title {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     flex: 1;
-    max-width: 100%;
+    padding-top: 0.4rem;
+    text-align: center;
     height: inherit;
     font-size: 2rem;
     border-bottom: 0.063rem solid var(--noGuessColor);
 }
-header > button {
+.gameScreenSVGButton {
     border: 0px;
     border-bottom: 0.063rem solid var(--noGuessColor);
     width: auto;
     height: inherit;
     background-color: var(--bgColor);
 }
-header > button:hover {
+.gameScreenSVGButton:hover {
     background-color: var(--hoverColor);
 }
 .disabledHeaderButton {
@@ -269,68 +299,57 @@ header > button:hover {
 .gameScreenSVGButton > svg > path {
     fill: var(--baseColor);
 }
-.gameContainer {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
 .alertList {
-    display: none; /* flex */
-    position: fixed;
-    width: 100vw;
-    height: 100vw;
+    display: flex; /* flex */
     flex-direction: column;
-    justify-content: flex-start;
     align-items: center;
-    padding-top: 3.1rem;
-    z-index: 69; /* nice */
+    position: absolute;
+    width: 100%;
+    gap: 1rem;
+    padding-top: 1.35rem;
+    z-index: 19; /* nice */
 }
 .alert {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 1rem;
-    width: 8rem;
+    width: fit-content;
     height: 2.75rem;
     border-radius: 0.2rem;
     background-color: var(--baseColor);
     color: var(--alertFontColor);
-    text-align: center;
+    padding: 0.8rem;
     font-size: 0.95rem;
+    animation: fadeOut 200ms 1500ms;
 }
 .dummyAlert {
-    display: None;
+    display: none;
+}
+.gameContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 .guessGrid {
-    padding: 3rem;
     display: grid;
+    padding: 1rem;
     gap: 0.25rem 0.25rem;
-    grid-template-columns: 3.5rem 3.5rem 3.5rem 3.5rem 3.5rem 3.5rem;
-    grid-template-rows: 3.5rem 3.5rem 3.5rem 3.5rem 3.5rem 3.5rem;
+    grid-template-columns: repeat(6, 3.5rem);
+    grid-template-rows: repeat(6, 3.5rem);
 }
 .tile {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     max-width: 4rem;
     max-height: 4rem;
+    padding-top: 0.5rem;
+    text-align: center;
     font-size: 2rem;
     border: 0.125rem solid var(--noGuessColor);
-    color: var(--baseColor);
+    color: var(--noGuessTextColor);
 }
 .selected {
     border-color: var(--ripGuessColor);
-}
-.animation100MsDelay { /* TODO come back to this */
-    transform: scaleX(0.5);
+    animation: selectTile 300ms;
 }
 .keyboard {
-    display: flex;
+    display: grid;
     gap: 0.3rem;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
 }
 .row {
     display: flex;
@@ -345,21 +364,24 @@ header > button:hover {
     height: inherit;
     border: none;
     border-radius: 0.25rem;
-    background-color: var(--noGuessColor);
     font-size: 1.25rem;
-    color: var(--baseColor);
+    background-color: var(--noGuessColor);
+    color: var(--noGuessTextColor);
 }
 .rip {
     background-color: var(--ripGuessColor);
     border-color: var(--ripGuessColor);
+    color: var(--ripTextColor);
 }
 .meh {
     background-color: var(--mehGuessColor);
     border-color: var(--mehGuessColor);
+    color: var(--mehAndFeinTextColor);
 }
 .fein {
     background-color: var(--feinGuessColor);
     border-color: var(--feinGuessColor);
+    color: var(--mehAndFeinTextColor);
 }
 .enterAndDeleteKey {
     width: 4.5rem;
