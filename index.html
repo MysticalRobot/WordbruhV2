@@ -13,10 +13,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <script src="script.js" defer="true"></script>
   </head>
-  <body class="light normalContrast">
+  <body id="bigBody" class="light normalContrast">
     <div id="landingScreen" class="landingScreen">
       <div></div>
-      <h1 id="greeting" class="greeting robotoBold">Hey Bruh</h1>
+      <h1 id="greeting" class="greeting robotoBold">Hi Bruh</h1>
       <!--
         - 2 before: loginIn, play
         - 1 while: continue
@@ -24,7 +24,7 @@
         - media queries to change size/orientation of buttons, 
           location of logo/title (flex-end to flex-start)
       -->
-      <p id="landingPrompt" class="landingPrompt robotoMedium">Open the window luther</p>
+      <p id="landingPrompt" class="landingPrompt robotoMedium">gloop borp florp</p>
       <div id="landingButtons" class="landingButtons">
         <button id="landingLogInButton" class="landingButton robotoLight">Log in</button>
         <button id="playButton" class="landingButton darkLandingButton robotoLight">Play</button>
@@ -32,75 +32,55 @@
         <button id="seeStatsButton" class="landingButton darkLandingButton robotoLight">See stats</button>
       </div>
     </div>
-    <div id="overlay" class="overlay">
-      <div id="settings" class="popUp settings">
-        <div class="settingsHeader">
-          <h2 class="settingsTitle robotoMedium">Settings</h2>
-          <button id="settingsExitButton" class="settingsExitButton" aria-label="exitButton">
-            <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
-              <path d="M0 14.545L1.455 16 8 9.455 14.545 16 16 14.545 9.455 8 16 
-              1.455 14.545 0 8 6.545 1.455 0 0 1.455 6.545 8z" fill-rule="evenodd">
-              </path>
-            </svg>
-          </button>
-        </div>
-        <div class="settingsSection">
-          <div class="settingsTextContainer">
-            <h3 class="robotoLight">Hard Mode</h3>
-            <p class="robotoExtraLight">hints must be used after being revealed</p>
-          </div>
-          <button id="hardModeToggle" class="settingsToggle">
-            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 
-              12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21Z">
-              </path>
-            </svg>          
-          </button>
-        </div>
-        <div class="settingsSection">
-          <div class="settingsTextContainer">
-            <h3 class="robotoLight">Dark Theme</h3>
-            <p class="robotoExtraLight">do you want to join the dark side?</p>
-          </div>
-          <button id="darkThemeToggle" class="settingsToggle">
-            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 
-              12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21Z">
-              </path>
-            </svg>              
-          </button>
-        </div>
-        <div class="settingsSection">
-          <div class="settingsTextContainer">
-            <h3 class="robotoLight">High Contrast Mode</h3>
-            <p class="robotoExtraLight">improved contrast for colorblindness</p>
-          </div>
-          <button id="highContrastToggle" class="settingsToggle">
-            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 
-              12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21Z">
-              </path>
-            </svg>           
-          </button>
-        </div>
-        <div class="settingsSection lastSettingsSection">
-          <div class="settingsTextContainer">
-            <h3 class="robotoLight">Onscreen Keyboard Input Only</h3>
-            <p class="robotoExtraLight">only register onscreen keyboard input</p>
-          </div>
-          <button id="onscreenKeyboardToggle" class="settingsToggle">
-            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 
-              12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21Z">
-              </path>
-            </svg>             
-          </button>
-        </div>
+    <dialog id="settingsModal" class="gameModal settingsModal" tabindex="-1">
+      <div class="settingsHeader">
+        <h2 class="settingsTitle robotoMedium">Settings</h2>
+        <button id="settingsExitButton" class="settingsExitButton" aria-label="exitButton">
+          <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 14.545L1.455 16 8 9.455 14.545 16 16 14.545 9.455 8 16 
+            1.455 14.545 0 8 6.545 1.455 0 0 1.455 6.545 8z" fill-rule="evenodd">
+            </path>
+          </svg>
+        </button>
       </div>
-      <div id="howTo" class="howTo popUp"></div>
-      <div id="signIn" class="signIn popUp"></div>
-      <div id="stats" class="stats popUp"></div>
-    </div>
+      <section class="settingsSection">
+        <div class="settingsTextContainer">
+          <h3 class="robotoLight">Hard Mode</h3>
+          <p class="robotoExtraLight">hints must be used after being revealed</p>
+        </div>
+        <input id="hardModeToggle" class="settingsToggle" type="checkbox">
+      </section>
+      <section class="settingsSection">
+        <div class="settingsTextContainer">
+          <h3 class="robotoLight">Dark Theme</h3>
+          <p class="robotoExtraLight">do you want to join the dark side?</p>
+        </div>
+        <input id="darkThemeToggle" class="settingsToggle" type="checkbox">
+      </section>
+      <section class="settingsSection">
+        <div class="settingsTextContainer">
+          <h3 class="robotoLight">High Contrast Mode</h3>
+          <p class="robotoExtraLight">improved contrast for colorblindness</p>
+        </div>
+        <input id="highContrastToggle" class="settingsToggle" type="checkbox">
+      </section>
+      <section class="settingsSection">
+        <div class="settingsTextContainer">
+          <h3 class="robotoLight">Onscreen Keyboard Input Only</h3>
+          <p class="robotoExtraLight">only register onscreen keyboard input</p>
+        </div>
+        <input id="onscreenKeyboardToggle" class="settingsToggle" type="checkbox">
+      </section>
+      <footer class="settingsFootNote robotoExtraLight">
+        <p>
+          created by Dhruv but impossible without these 
+          <a href="https://github.com/MysticalRobot/WordbruhV2/blob/main/README.md"
+          target="_blank" rel="noopener noreferrer">
+            cool people
+          </a>
+        </p>
+      </footer>
+    </dialog>
     <div id="gameScreen" class="gameScreen">
       <header>
         <button id="settingsButton" class="gameScreenSVGButton" aria-label="settings">
@@ -167,10 +147,6 @@
             14.2091 9.79086 16 12 16Z"></path>
           </svg>
         </button>
-        <!--
-          FOR HINT BUTTON: use "disabled" when hit or game over 
-          and toggleAttribute(element, attribute) to reinstate
-        -->
         <button id="hintButton" class="gameScreenSVGButton" aria-label="answer hint">
           <svg viewBox="0 0 32 32" style="scale:0.9" 
           xmlns="http://www.w3.org/2000/svg">
@@ -253,88 +229,100 @@
         <li id="dummyAlert" class="dummyAlert alert">my name is John Cena</li>
       </ul>
       <div class="gameContainer">
-        <div data-guesses class="guessGrid">
-          <div class="tile robotoBold animation100MsDelay"></div>
-          <div class="tile robotoBold"></div>
-          <div class="tile robotoBold"></div>
-          <div class="tile robotoBold"></div>
-          <div class="tile robotoBold"></div>
-          <div class="tile robotoBold"></div>
-          <div class="tile robotoBold"></div>
-          <div class="tile robotoBold"></div>
-          <div class="tile robotoBold"></div>
-          <div class="tile robotoBold"></div>
-          <div class="tile robotoBold"></div>
-          <div class="tile robotoBold"></div>
-          <div class="tile robotoBold"></div>
-          <div class="tile robotoBold"></div>
-          <div class="tile robotoBold"></div>
-          <div class="tile robotoBold"></div>
-          <div class="tile robotoBold"></div>
-          <div class="tile robotoBold"></div>
-          <div class="tile robotoBold"></div>
-          <div class="tile robotoBold"></div>
-          <div class="tile robotoBold"></div>
-          <div class="tile robotoBold"></div>
-          <div class="tile robotoBold"></div>
-          <div class="tile robotoBold"></div>
-          <div class="tile robotoBold"></div>
-          <div class="tile robotoBold"></div>
-          <div class="tile robotoBold"></div>
-          <div class="tile robotoBold"></div>
-          <div class="tile robotoBold"></div>
-          <div class="tile robotoBold"></div>
-          <div class="tile robotoBold"></div>
-          <div class="tile robotoBold"></div>
-          <div class="tile robotoBold"></div>
-          <div class="tile robotoBold"></div>
-          <div class="tile robotoBold"></div>
-          <div class="tile robotoBold"></div>
+        <div class="guessGrid">
+          <div class="guess">
+            <div data-tile class="tile robotoBold"></div>
+            <div data-tile class="tile robotoBold"></div>
+            <div data-tile class="tile robotoBold"></div>
+            <div data-tile class="tile robotoBold"></div>
+            <div data-tile class="tile robotoBold"></div>
+            <div data-tile class="tile robotoBold"></div>
+          </div>
+          <div class="guess">
+            <div data-tile class="tile robotoBold"></div>
+            <div data-tile class="tile robotoBold"></div>
+            <div data-tile class="tile robotoBold"></div>
+            <div data-tile class="tile robotoBold"></div>
+            <div data-tile class="tile robotoBold"></div>
+            <div data-tile class="tile robotoBold"></div>
+          </div>
+          <div class="guess">
+            <div data-tile class="tile robotoBold"></div>
+            <div data-tile class="tile robotoBold"></div>
+            <div data-tile class="tile robotoBold"></div>
+            <div data-tile class="tile robotoBold"></div>
+            <div data-tile class="tile robotoBold"></div>
+            <div data-tile class="tile robotoBold"></div>
+          </div>
+          <div class="guess">
+            <div data-tile class="tile robotoBold"></div>
+            <div data-tile class="tile robotoBold"></div>
+            <div data-tile class="tile robotoBold"></div>
+            <div data-tile class="tile robotoBold"></div>
+            <div data-tile class="tile robotoBold"></div>
+            <div data-tile class="tile robotoBold"></div>
+          </div>
+          <div class="guess">
+            <div data-tile class="tile robotoBold"></div>
+            <div data-tile class="tile robotoBold"></div>
+            <div data-tile class="tile robotoBold"></div>
+            <div data-tile class="tile robotoBold"></div>
+            <div data-tile class="tile robotoBold"></div>
+            <div data-tile class="tile robotoBold"></div>
+          </div>
+          <div class="guess">
+            <div data-tile class="tile robotoBold"></div>
+            <div data-tile class="tile robotoBold"></div>
+            <div data-tile class="tile robotoBold"></div>
+            <div data-tile class="tile robotoBold"></div>
+            <div data-tile class="tile robotoBold"></div>
+            <div data-tile class="tile robotoBold"></div>
+          </div>
         </div>
         <div class="keyboard" >
           <div class="row">
-            <button data-char class="key robotoBold">Q</button>
-            <button data-char class="key robotoBold">W</button>
-            <button data-char class="key robotoBold">E</button>
-            <button data-char class="key robotoBold">R</button>
-            <button data-char class="key robotoBold">T</button>
-            <button data-char class="key robotoBold">Y</button>
-            <button data-char class="key robotoBold">U</button>
-            <button data-char class="key robotoBold">I</button>
-            <button data-char class="key robotoBold">O</button>
-            <button data-char class="key robotoBold">P</button>
+            <button data-char class="key robotoBold" aria-disabled="false">Q</button>
+            <button data-char class="key robotoBold" aria-disabled="false">W</button>
+            <button data-char class="key robotoBold" aria-disabled="false">E</button>
+            <button data-char class="key robotoBold" aria-disabled="false">R</button>
+            <button data-char class="key robotoBold" aria-disabled="false">T</button>
+            <button data-char class="key robotoBold" aria-disabled="false">Y</button>
+            <button data-char class="key robotoBold" aria-disabled="false">U</button>
+            <button data-char class="key robotoBold" aria-disabled="false">I</button>
+            <button data-char class="key robotoBold" aria-disabled="false">O</button>
+            <button data-char class="key robotoBold" aria-disabled="false">P</button>
           </div>
           <div class="row">
-            <button data-char class="key robotoBold">A</button>
-            <button data-char class="key robotoBold">S</button>
-            <button data-char class="key robotoBold">D</button>
-            <button data-char class="key robotoBold">F</button>
-            <button data-char class="key robotoBold">G</button>
-            <button data-char class="key robotoBold">H</button>
-            <button data-char class="key robotoBold">J</button>
-            <button data-char class="key robotoBold">K</button>
-            <button data-char class="key robotoBold">L</button>
+            <button data-char class="key robotoBold" aria-disabled="false">A</button>
+            <button data-char class="key robotoBold" aria-disabled="false">S</button>
+            <button data-char class="key robotoBold" aria-disabled="false">D</button>
+            <button data-char class="key robotoBold" aria-disabled="false">F</button>
+            <button data-char class="key robotoBold" aria-disabled="false">G</button>
+            <button data-char class="key robotoBold" aria-disabled="false">H</button>
+            <button data-char class="key robotoBold" aria-disabled="false">J</button>
+            <button data-char class="key robotoBold" aria-disabled="false">K</button>
+            <button data-char class="key robotoBold" aria-disabled="false">L</button>
           </div>
           <div class="row">
-            <button data-enter class="key enterAndDeleteKey robotoBold">ENTER</button>
-            <button data-char class="key robotoBold">Z</button>
-            <button data-char class="key robotoBold">X</button>
-            <button data-char class="key robotoBold">C</button>
-            <button data-char class="key robotoBold">V</button>
-            <button data-char class="key robotoBold">B</button>
-            <button data-char class="key robotoBold">N</button>
-            <button data-char class="key robotoBold">M</button>
-            <button data-delete class="key enterAndDeleteKey robotoBold">DELETE</button>
+            <button data-enter class="key enterAndDeleteKey robotoBold" aria-disabled="false">ENTER</button>
+            <button data-char class="key robotoBold" aria-disabled="false">Z</button>
+            <button data-char class="key robotoBold" aria-disabled="false">X</button>
+            <button data-char class="key robotoBold" aria-disabled="false">C</button>
+            <button data-char class="key robotoBold" aria-disabled="false">V</button>
+            <button data-char class="key robotoBold" aria-disabled="false">B</button>
+            <button data-char class="key robotoBold" aria-disabled="false">N</button>
+            <button data-char class="key robotoBold" aria-disabled="false">M</button>
+            <button data-delete class="key enterAndDeleteKey robotoBold" aria-disabled="false">DELETE</button>
           </div>
           <div class="row">
-            <button data-left class="key leftAndRightKey gameScreenSVGButton">
+            <button data-left class="key leftAndRightKey gameScreenSVGButton" aria-disabled="false">
               <svg fill="black" viewBox="0 0 24 24" 
               xmlns="http://www.w3.org/2000/svg" transform="rotate(-90)">
                 <path d="M21,21H3L12,3Z"></path>
               </svg>
             </button>
-            <button data-space class="key spaceBar robotoBold">SPACE</button>
-            <button data-right class="key leftAndRightKey gameScreenSVGButton">
+            <button data-space class="key spaceBar robotoBold" aria-disabled="false">SPACE</button>
+            <button data-right class="key leftAndRightKey gameScreenSVGButton" aria-disabled="false">
               <svg fill="black" viewBox="0 0 24 24" 
               xmlns="http://www.w3.org/2000/svg" transform="rotate(90)">
                 <path d="M21,21H3L12,3Z"></path>
@@ -350,8 +338,6 @@
   officially favicon
   Word animation is literally squeezing to death and re-expanding
   correct guess animation is literally jumping up and down twice for each char
-  Use addAttribute -> class="rip/meh/fein" to change appearance of answer and...
-    button letters after being used
   For the hint have an alert that tells to check the keyboard for revealed letter
   Use placeholder attribute for sign in form
   Use mp3 for sound bites and create some time of alert to unmute the game

@@ -29,7 +29,6 @@
     --ripTextColor: #ffffff;
     --hoverColor: #dcdcdc;
     --overlayColor: #ffffff75;
-    --fadedOverlayColor: #ffffff00;
 }
 .dark {
     --bgColor: #151515;
@@ -42,10 +41,12 @@
     --ripTextColor: #ffffff;
     --hoverColor: #474747;
     --overlayColor: #00000075;
-    --fadedOverlayColor: #00000000;
 }
 button:hover {
     cursor: pointer;
+}
+button[aria-disabled="true"]:hover {
+    cursor: not-allowed;
 }
 .robotoExtraLight {
     font-weight: 300;
@@ -59,43 +60,31 @@ button:hover {
 .robotoBold {
     font-weight: 700;
 }
-@keyframes fadeOut {
+@keyframes fade {
     0% {opacity: 1;}
     100% {opacity: 0;}
 }
-@keyframes overlayFadeIn {
-    0% {background-color: var(--fadedOverlayColor)}
-    100% {background-color: var(--overlayColor);}
-}
-@keyframes overlayFadeOut {
-    0% {background-color: var(--overlayColor)}
-    100% {background-color: var(--fadedOverlayColor);}
-}
-@keyframes popUpFadeIn {
+@keyframes showModal {
     0% {opacity: 0; transform: translateY(3rem);}
     100% {opacity: 1; transform: translateY(0rem);}
 }
-@keyframes popUpFadeOut {
+@keyframes closeModal {
     0% {opacity: 1; transform: translateY(0rem);}
     100% {opacity: 0; transform: translateY(3rem);}
-}
-@keyframes toggleOn {
-    0% {transform: translateX(0rem);}
-    100% {transform: translateX(0.85rem);}
-}
-@keyframes toggleOff {
-    0% {transform: translateX(0.85rem);}
-    100% {transform: translateX(0rem);}
 }
 @keyframes selectTile {
     0% {transform: scale(1, 1);}
     50% {transform: scale(1.1, 1.1);}
     100% {transform: scale(1, 1);}
 }
-.fadingElement {
-    animation-name: fadeOut;
-    animation-timing-function: ease-out;
-    animation-duration: 200ms;
+.fade {
+    animation: fade 200ms ease-out;
+}
+.showModal {
+    animation: showModal 200ms ease-out;
+}
+.closeModal {
+    animation: closeModal 200ms ease-out;
 }
 .landingScreen {
     display: flex;
@@ -116,11 +105,6 @@ button:hover {
     justify-content: center;
     align-self: center;
 }
-@media only screen and (max-width: 750px) {
-    .landingButtons {
-        flex-direction: column;
-    }
-}
 .landingButton {
     width: 10rem;
     height: 3.2rem;
@@ -136,58 +120,28 @@ button:hover {
     color: #ffffff;
 }
 .gameScreen {
-    display: block;
-}
-.overlay {
     display: none;
-    position: fixed;
-    z-index: 21;
-    width: 100%;
-    height: 100%;
-    justify-content: center;
-    align-items: center;
+}
+.gameModal {
+    margin: auto;
+    width: 32rem;
+    border: 0;
+}
+.gameModal::backdrop {
     background-color: var(--overlayColor);
 }
-.overlayFadeIn {
-    animation-name: overlayFadeIn;
-    animation-duration: 200ms; 
-    animation-timing-function: ease-out;
-}
-.overlayFadeOut {
-    animation-name: overlayFadeOut;
-    animation-duration: 200ms; 
-    animation-timing-function: ease-out;
-}
-.popUp {
-    display: flex;
-    position: absolute;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    z-index: inherit + 1;
+.settingsModal {
+    min-width: 9rem;
+    height: 21rem;
+    padding: 1rem;
     background-color: var(--bgColor);
     box-shadow: 0rem 0rem 1rem 0.125rem #00000025;
     border-radius: 0.3rem;
-}
-.popUpFadeIn {
-    animation-name: popUpFadeIn;
-    animation-duration: 200ms; 
-    animation-timing-function: ease-out;
-}
-.popUpFadeOut {
-    animation-name: popUpFadeOut;
-    animation-duration: 200ms; 
-    animation-timing-function: ease-out;
-}
-.settings {
-    width: 32rem;
-    height: 19rem;
-    padding: 0.25rem;
+    font-size: 0.9rem;
+    color: var(--baseColor);
 }
 .settingsHeader {
-    display: block;
-    width: inherit;
-    height: 3rem;
+    height: 2.5rem;
 }
 .settingsTitle {
     text-align: center;
@@ -197,74 +151,61 @@ button:hover {
 }
 .settingsExitButton {
     position: absolute;
-    top: 2rem;
-    right: 2rem;
-    height: 1.25rem;
+    overflow-y: hidden;
+    top: 1.5rem;
+    right: 1.5rem;
+    width: 1.2rem;
+    height: 1.2rem;
     border: none;
-    background-color: var(--bgColor);
-}
-.settingsExitButton > svg {
-    padding: 0.75;
-    height: inherit;
-}
-.settingsExitButton > svg > path {
     fill: var(--baseColor);
+    background-color: var(--bgColor);
 }
 .settingsSection {
     display: flex;
     justify-content: space-between;
-    width: 92%;
     border-bottom: 0.063rem solid var(--noGuessColor);
     padding-top: 0.6rem;
     padding-bottom: 0.6rem;
 }
-.settingsTextContainer {
-    font-size: 0.9rem;
-}
-.lastSettingsSection {
-    border: none;
+.settingsFootNote {
+    padding-top: 0.6rem;
 }
 .settingsToggle {
-    display: flex;
-    justify-content: flex-start;
+    appearance: none;
     align-self: center;
-    border: none;
-    width: 2.4rem;; /* 2, 1.25 */
-    height: 1.5rem;
+    min-width: 1.9rem; /* 2, 1.25 */
+    height: 1.2rem;
+    border: 0rem;
     border-radius: 1rem;
-    background-color: #7d7d7d; /* usable-unusable #7d7d7d #dcdcdc */
+    background-color: #000000; /* usable-unusable #7d7d7d #dcdcdc */
 }
-.settingsToggle > svg {
-    align-self: center;
-    height: inherit;
+.settingsToggle:hover {
+    cursor: pointer;
 }
-.toggleOn {
-    animation-duration: 300ms;
-    animation-name: toggleOn; /* change name, bg color, justify content */
+.settingsToggle::before {
+    content: "";
+    position: absolute;
+    width: max(0.95rem, 1vw);
+    height: max(0.95rem, 1vh);
+    border-radius: 1rem;
+    transform: translate(0.16rem, 0.125rem);
+    background-color: #ffffff;
+    transition-property: transform;
+    transition-duration: 200ms;
+    transition-timing-function: ease-out;
 }
-.settingsToggle > svg > path {
-    fill: #ffffff;
+.settingsToggle:checked {
+    background-color: var(--feinGuessColor);
 }
-.howTo {
-    display: none;
-    width: 32rem;
-    height: 41rem;
-}
-.signIn {
-    display: none;
-    width: 32rem;
-    height: 41rem;
-}
-.stats {
-    display: none;
-    width: 32rem;
-    height: 41rem;
+.settingsToggle:checked::before {
+    transform: translate(0.775rem, 0.125rem);
 }
 body {
     background: var(--bgColor); 
 }
 header {
     display: flex;
+    align-items: center;
     height: 3rem;
     color: var(--baseColor);
 }
@@ -277,6 +218,7 @@ header {
     border-bottom: 0.063rem solid var(--noGuessColor);
 }
 .gameScreenSVGButton {
+    overflow-y: hidden;
     border: 0px;
     border-bottom: 0.063rem solid var(--noGuessColor);
     width: auto;
@@ -285,19 +227,16 @@ header {
 }
 .gameScreenSVGButton:hover {
     background-color: var(--hoverColor);
-}
-.disabledHeaderButton {
-    background-color: var(--bgColor) !important;   
-}
-[aria-disabled="true"]:hover {
-    cursor: not-allowed;
+    transition-timing-function: ease-out;
+    transition-duration: 200ms;
 }
 .gameScreenSVGButton > svg {
     padding: 0.75rem;
     height: inherit;
-}
-.gameScreenSVGButton > svg > path {
     fill: var(--baseColor);
+}
+.disabledHeaderButton {
+    background-color: var(--bgColor) !important;   
 }
 .alertList {
     display: flex; /* flex */
@@ -330,13 +269,14 @@ header {
 .guessGrid {
     display: grid;
     padding: 1rem;
-    gap: 0.25rem 0.25rem;
-    grid-template-columns: repeat(6, 3.5rem);
-    grid-template-rows: repeat(6, 3.5rem);
+}
+.guess {
+    display: flex;
 }
 .tile {
-    max-width: 4rem;
-    max-height: 4rem;
+    height: 3.5rem;
+    width: 3.5rem;
+    margin: 0.15rem;
     padding-top: 0.5rem;
     text-align: center;
     font-size: 2rem;
@@ -349,24 +289,32 @@ header {
 }
 .keyboard {
     display: grid;
-    gap: 0.3rem;
+    gap: 0.25rem;
+    width: 100%;
 }
 .row {
     display: flex;
-    gap: 0.3rem;
-    flex-direction: row;
     justify-content: center;
     align-items: center;
-    height: 3.25rem;
+    gap: 0.25rem;
+    height: 3.4rem;
 }
 .key {
     width: 2.75rem;
-    height: inherit;
+    height: 3.25rem;
     border: none;
     border-radius: 0.25rem;
     font-size: 1.25rem;
+    padding: 0.1rem;
     background-color: var(--noGuessColor);
     color: var(--noGuessTextColor);
+}
+.key[aria-disabled="false"]:hover {
+    border: 0.1rem solid var(--baseColor);
+    transition: transform;
+    transform: scale(1.045, 1.045);
+    transition-timing-function: ease-out;
+    transition-duration: 200ms;
 }
 .rip {
     background-color: var(--ripGuessColor);
@@ -392,6 +340,11 @@ header {
 }
 .leftAndRightKey {
     width: 4rem;
+}
+@media only screen and (max-width: 750px) {
+    .landingButtons {
+        flex-direction: column;
+    }
 }
 /* Extra small devices (phones, 600px and down) 
 @media only screen and (max-width: 600px) {...}
