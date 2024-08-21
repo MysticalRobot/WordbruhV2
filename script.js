@@ -1,6 +1,6 @@
 "use strict";
 class Wordbruh {
-  constructor(target, notGuessed, over, hintRevealed, previousGuesses) {
+  constructor(target, feinGuessed, over, hintRevealed, hardModeEnabled, previousGuesses) {
     this.target = target; // (string) word to be guessed
     this.targetMap = new Map(); // (map) target letter-[occurences]
     for (let i = 0; i < 6; i++) {
@@ -11,9 +11,10 @@ class Wordbruh {
         this.targetMap.set(char, new Set([i]));
       }
     }
-    this.notGuessed = notGuessed; // (array) indices of letters not guessed yet
+    this.feinGuessed = feinGuessed; // (array) indices of letters fein guessed
     this.over = over; // (boolean)
     this.hintRevealed = hintRevealed;
+    this.hardModeEnabled = hardModeEnabled;
     this.previousGuesses = previousGuesses; // (array) prev guesses
     this.currentGuess = [" ", " ", " ", " ", " ", " "]; // (array) current guesses
     this.tileIndex = 0; // (float) current tile index
@@ -24,45 +25,83 @@ class Wordbruh {
     this.accountOpen = false;
     this.light = true;
     this.highContrast = false;
+    this.onscreenKeyboardOnly = false;
+
+    if (!this.over) {
+      this.tileIndex = 0
+      const index = this.previousGuesses.length;
+      tiles[index].classList.add("selected");
+    }
+
+    if (!this.hardModeEnabled && this.previousGuesses.length != 0) {
+      hardModeToggle.ariaDisabled = 'true';
+    }
   }
 
   checkAnswer() {
-    let guess = "";
-    for (let i = 0; i < 6; i++) {
-      if (this.currentGuess[i] == " ") {
+    // check for spaces
+    for (const char of this.currentGuess) {
+      if (char == " ") {
         showAlert("no spaces pls..");
         return;
       }
-      guess += this.currentGuess[i];
     }
-    console.log(guess);
+
+    // (hardmode only) check if all revealed hints are used
+    const feinGuessedSet = new Set(this.feinGuessed);
+    if (this.hardModeEnabled) {
+      console.log("i am hard man");
+      const positions = ['1st', '2nd', '3rd', '4th', '5th', '6th'];
+      for (let i = 0; i < 6; i++) {
+        if (this.target.charAt(i) != this.currentGuess[i] && feinGuessedSet.has(i)) {
+          showAlert(`${positions[i]} letter must be ${this.target.charAt(i)}`);
+          return;
+        }
+      }
+    }
+    
     // TODO check wordlist
+    
+    // update each tile
     let i = this.previousGuesses.length;
+    let matches = 0;
     const limit = i + 6;
     for (; i < limit; i++) {
+      // get the first tile of the current guess
       const tile = tiles[i];
-      const char = tile.innerHTML;
       const charIndex = i % 6;
+      const char = this.currentGuess[charIndex];
+      const animationDelay = charIndex * 100;
       if (this.targetMap.has(char)) {
         if (this.targetMap.get(char).has(charIndex)) {
-          tile.classList.add("fein");
+          tile.classList.add('fein', 'validatedAnswer', `animation${animationDelay}msDelay`);
           mappedCharButtons.get(char).classList.add("fein");
-          this.notGuessed.splice(this.notGuessed.indexOf(charIndex), 1);
+          if (!feinGuessedSet.has(charIndex)) {
+            feinGuessedSet.add(charIndex);
+            this.feinGuessed.push(charIndex);
+          }
+          matches++;
         } else {
-          tile.classList.add("meh");
+          tile.classList.add('meh', 'validatedAnswer', `animation${animationDelay}msDelay`);
           mappedCharButtons.get(char).classList.add("meh");
         }
       } else {
-        tile.classList.add("rip");
+        tile.classList.add('rip', 'validatedAnswer', `animation${animationDelay}msDelay`);
         mappedCharButtons.get(char).classList.add("rip");
       }
       this.previousGuesses.push(char);
     }
-    // TODO add animation, alert
     const previousTile = tiles[this.previousGuesses.length - 1];
     previousTile.classList.remove("selected");
-    if (guess == this.target) {
-      // lost
+    
+    // deactivate hard mode toggle
+    if (!this.hardModeEnabled && hardModeToggle.ariaDisabled != 'true') {
+      hardModeToggle.ariaDisabled = 'true';
+    }
+    // switch to next guess or end game
+    // TODO add animation, alert
+    if (matches == 6) {
+      // won
       endGame();
     } else if (this.previousGuesses.length != 36) {
       const newTile = tiles[this.previousGuesses.length];
@@ -74,8 +113,6 @@ class Wordbruh {
       endGame();
     }
   }
-
-  // gradeTile(tile, )
 
   updateTile(newTileIndex, newChar) {
     if (newChar) {
@@ -93,17 +130,24 @@ class Wordbruh {
   }
  
   displayHint() {
-    const notGuessed = new Set(this.notGuessed);
+    const feinGuessedSet = new Set(this.feinGuessed);
     for (let i = 0; i < 6; i++) {
-      if (notGuessed.has(i)) {
+      if (!feinGuessedSet.has(i)) {
         mappedCharButtons.get(this.target.charAt(i)).classList.add("fein");
-        this.notGuessed.splice(this.notGuessed.indexOf(i), 1);
-        // TODO: alert, animation (same as entering letter)
+        this.feinGuessed.push(i);
+        const previousTile = tiles[this.previousGuesses.length + this.tileIndex];
+        previousTile.classList.remove('selected');
+        const currentTile = tiles[this.previousGuesses.length + i];
+        currentTile.innerHTML = this.target.charAt(i);
+        currentTile.classList.add('selected');
+        // wont ever block hint (first letter always)
+        showAlert(`use this ${this.target.charAt(i)} wisely ^_^`);
         break;
       }
     }
     disableHintButton();
   }
+
 }
 
 // fein color
@@ -147,7 +191,7 @@ const spaceButton = document.querySelector('[data-space]');
 // makes it easy to check if a valid key was pressed
 const otherButtons = new Set(["BACKSPACE", "ENTER", "ARROWLEFT", "ARROWRIGHT", " "]);
 const tiles = document.querySelectorAll('[data-tile]'); // holds all game tiles
-const game = new Wordbruh("SCARAB", [0, 1, 2, 3, 4, 5], false, false, []);
+const game = new Wordbruh("SCARAB", [], false, false, false, []);
 
 function loadGame() {
   // TODO
@@ -268,7 +312,14 @@ settingsModal.addEventListener('click', (event) => {
 });
 
 hardModeToggle.addEventListener('change', () => {
-  console.log("dawg");
+  if (game.previousGuesses.length == 0) {
+    game.hardModeEnabled = !game.hardModeEnabled;
+  } else if (game.hardModeEnabled) {
+    game.hardModeEnabled = false;
+    hardModeToggle.ariaDisabled = 'true';
+  } else {
+    showAlert('Hard mode must be enabled before first guess');
+  }
 });
 
 darkThemeToggle.addEventListener('change', () => {
@@ -293,7 +344,7 @@ highContrastToggle.addEventListener('change', () => {
 });
 
 onscreenKeyboardToggle.addEventListener('change', () => {
-  console.log("bruh");
+  game.onscreenKeyboardOnly = !game.onscreenKeyboardOnly;
 });
 
 hintButton.addEventListener('click', () => {
@@ -308,15 +359,6 @@ howToButton.addEventListener('click', () => {
 accountButton.addEventListener('click', () => {
 });
 
-window.addEventListener("load", () => {
-  if (game.running && !game.over) {
-    game.tileIndex = 0
-    const index = game.previousGuesses.length;
-    tiles[index].classList.add("selected");
-    console.log("loaded");
-  }
-});
-
 document.body.addEventListener('keydown', (button) => {
   const pressed = button.key.toUpperCase();
   console.log(pressed);
@@ -326,8 +368,11 @@ document.body.addEventListener('keydown', (button) => {
   } else if (pressed == "TAB" && onscreenKeyboardToggle == document.activeElement) {
     button.preventDefault();
     settingsExitButton.focus();
-  } else if (game.running && !game.over && !onCooldown.has(pressed) &&
-    (mappedCharButtons.has(pressed) || otherButtons.has(pressed))) { 
+  } else if (
+    game.running && !game.over && !onCooldown.has(pressed) &&
+    !game.onscreenKeyboardOnly &&
+    (mappedCharButtons.has(pressed) || otherButtons.has(pressed))
+    ) { 
     onCooldown.add(pressed);
     switch (pressed) {
       case "ENTER":
@@ -337,15 +382,19 @@ document.body.addEventListener('keydown', (button) => {
         break;
       case "BACKSPACE":
         game.updateTile(Math.max(game.tileIndex - 1, 0), " ");
+        document.activeElement.blur();
         break;
       case "ARROWLEFT":
         game.updateTile(Math.max(game.tileIndex - 1, 0), "");
+        document.activeElement.blur();
         break;
       case "ARROWRIGHT":
         game.updateTile(Math.min(game.tileIndex + 1, 5), "");
+        document.activeElement.blur();
         break;
       default:
         game.updateTile(Math.min(game.tileIndex + 1, 5), pressed);
+        document.activeElement.blur();
     }
   } else if (pressed == 'ENTER') {
     const focusedToggle = document.activeElement;
