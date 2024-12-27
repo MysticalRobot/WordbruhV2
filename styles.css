@@ -151,7 +151,7 @@ button[aria-disabled="true"]:hover {
 .settingsHeader {
     height: 2.5rem;
 }
-.settingsTitle {
+.settingsHeader > h2 {
     text-align: center;
     height: inherit;
     padding-top: 0.25rem;
@@ -178,6 +178,7 @@ button[aria-disabled="true"]:hover {
 }
 .settingsFootNote {
     padding-top: 0.6rem;
+    padding-left: 0.2=8rem;
 }
 .settingsToggle {
     appearance: none;
@@ -222,6 +223,49 @@ button[aria-disabled="true"]:hover {
 }
 .settingsToggle[aria-disabled="true"]:checked::before {
     transform: translate(0.16rem, 0.125rem);
+}
+.howToModal {
+    min-width: 9rem;
+    height: 26rem;
+    padding: 1.5rem;
+    background-color: var(--bgColor);
+    box-shadow: 0rem 0rem 1rem 0.125rem #00000025;
+    border-radius: 0.3rem;
+    font-size: 0.9rem;
+    color: var(--baseColor);
+}
+.howToHeader > h2 {
+    font-size: 1.75rem;
+}
+.howToExitButtonContainer {
+    display: flex;
+    justify-content: flex-end;
+}
+.howToExitButton {
+    overflow-y: hidden;
+    width: 1.2rem;
+    height: 1.2rem;
+    border: none;
+    fill: var(--baseColor);
+    background-color: var(--bgColor);
+}
+.howToDirections > ul > li{
+    display: list-item;
+}
+.exampleGuess {
+    display: flex;
+    flex-direction: row;
+    gap: 0.25rem;
+}
+.exampleTile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 2rem;
+    width: 2rem;
+    font-size: 1.25rem;
+    border: 0.125rem solid var(--noGuessColor);
+    color: var(--noGuessTextColor);
 }
 body {
     background: var(--bgColor); 
@@ -297,11 +341,12 @@ header {
     display: flex;
 }
 .tile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: 3.5rem;
     width: 3.5rem;
     margin: 0.15rem;
-    padding-top: 0.5rem;
-    text-align: center;
     font-size: 2rem;
     border: 0.125rem solid var(--noGuessColor);
     color: var(--noGuessTextColor);
@@ -388,7 +433,8 @@ header {
 }
 @media only screen and (max-width: 750px) {
     .landingButtons {
-        flex-direction: column;
+        flex-direction: col
+        umn;
     }
 }
 /* Extra small devices (phones, 600px and down) 

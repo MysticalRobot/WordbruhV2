@@ -163,11 +163,14 @@ const seeStatsButton = document.getElementById('seeStatsButton');
 // settings modal elements
 const settingsModal = document.getElementById('settingsModal');
 const settingsExitButton = document.getElementById('settingsExitButton');
-const toggleEvents = ['change', 'click'];
 const hardModeToggle = document.getElementById('hardModeToggle');
 const darkThemeToggle = document.getElementById('darkThemeToggle');
 const highContrastToggle = document.getElementById('highContrastToggle');
 const onscreenKeyboardToggle = document.getElementById('onscreenKeyboardToggle');
+
+// howto modal elements
+const howToModal = document.getElementById('howToModal');
+const howToExitButton = document.getElementById('howToExitButton');
 
 // big body
 const body = document.getElementById("bigBody");
@@ -309,6 +312,18 @@ settingsExitButton.addEventListener('click', () => {
 
 settingsModal.addEventListener('click', (event) => {
   clickOffModal(settingsModal, event);
+});
+
+howToButton.addEventListener('click', () => {
+  showModal(howToModal);
+});
+
+howToExitButton.addEventListener('click', () => {
+  closeModal(howToModal);
+});
+
+howToModal.addEventListener('click', (event) => {
+  clickOffModal(howToModal, event);
 });
 
 hardModeToggle.addEventListener('change', () => {

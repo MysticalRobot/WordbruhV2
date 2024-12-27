@@ -15,7 +15,6 @@
   </head>
   <body id="bigBody" class="light normalContrast">
     <div id="landingScreen" class="landingScreen">
-      <div></div>
       <h1 id="greeting" class="greeting robotoBold">Hi Bruh</h1>
       <!--
         - 2 before: loginIn, play
@@ -80,6 +79,68 @@
           </a>
         </p>
       </footer>
+    </dialog>
+    <dialog id="howToModal" class="gameModal howToModal" tabindex="-1">
+      <div class="howToExitButtonContainer">
+        <button id="howToExitButton" class="howToExitButton" aria-label="exitButton">
+          <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 14.545L1.455 16 8 9.455 14.545 16 16 14.545 9.455 8 16 
+            1.455 14.545 0 8 6.545 1.455 0 0 1.455 6.545 8z" fill-rule="evenodd">
+            </path>
+          </svg>
+        </button>
+      </div>
+      <section class="howToHeader">
+        <h2 class="robotoMedium">How To Play</h2>
+        <p class="robotoExtraLight">6 tries, one Wordbruh</p>
+      </section>
+      <ul>
+        <li>Guesses must be valid 6-letter words</li>
+        <li>After guessing, the color of each tile will indicate your accuracy</li>
+      </ul>
+      <div class="examples">
+        <h3>Examples</h3>
+        <div class="example">
+          <div class="exampleGuess">
+            <div class="exampleTile robotoBold fein">B</div>
+            <div class="exampleTile robotoBold">U</div>
+            <div class="exampleTile robotoBold">F</div>
+            <div class="exampleTile robotoBold">F</div>
+            <div class="exampleTile robotoBold">E</div>
+            <div class="exampleTile robotoBold">R</div>
+          </div>
+          <p class="robotoLight"><strong class="robotoBold">B</strong> is located here in the word</p>
+        </div>
+        <div class="example">
+          <div class="exampleGuess">
+            <div class="exampleTile robotoBold fein">Q</div>
+            <div class="exampleTile robotoBold">U</div>
+            <div class="exampleTile robotoBold">E</div>
+            <div class="exampleTile robotoBold">A</div>
+            <div class="exampleTile robotoBold">S</div>
+            <div class="exampleTile robotoBold">Y</div>
+          </div>
+          <p class="robotoLight"><strong class="robotoBold">U</strong> is located elsewhere in the word</p>
+        </div>
+        <div class="example">
+          <div class="exampleGuess">
+            <div class="exampleTile robotoBold fein">S</div>
+            <div class="exampleTile robotoBold">L</div>
+            <div class="exampleTile robotoBold">O</div>
+            <div class="exampleTile robotoBold">U</div>
+            <div class="exampleTile robotoBold">C</div>
+            <div class="exampleTile robotoBold">H</div>
+          </div>
+          <p class="robotoLight"><strong class="robotoBold">O</strong> is not in the word</p>
+        </div>
+      </div>
+      <p class="howToAccountDirections robotoLight">
+        <a>Login or create a free Wordbruh account</a> to link your stats
+        </p>
+      <p>
+        A new puzzle is available daily at midnight. If you want to be reminded via
+        email to continue your streak, <a>sign up here</a>.
+      </p>
     </dialog>
     <div id="gameScreen" class="gameScreen">
       <header>
