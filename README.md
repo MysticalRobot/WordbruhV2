@@ -12,4 +12,6 @@
 
 - try to guess a predetermined six letter english word
 
+---
+
 chat I won't lie, I got bored of WordbruhV2 so it is incomplete
