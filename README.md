@@ -1,13 +1,15 @@
-chat I won't lie, I got bored of WordbruhV2 so it is incomplete
+# WordbruhV2
+
+6 letter word guessing game
 
 ![WordbruhV2 preview](./preview.gif)
 
-# how to run
+## how to run
 
 - simply open `index.html` in a browser window
 
-# how to play
+## how to play
 
 - try to guess a predetermined six letter english word
-- it currently allows you to enter any string consisting of english alphabet letters
 
+chat I won't lie, I got bored of WordbruhV2 so it is incomplete
