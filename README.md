@@ -6,7 +6,7 @@
 
 ## how to run
 
-- simply open `index.html` in a browser window
+- open `index.html` in a browser window (e.g. `firefox index.html`)
 
 ## how to play
 
